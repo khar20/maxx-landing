@@ -1,0 +1,16 @@
+---
+import ServiceCard from '@components/Card.astro';
+const cardItems = [
+	{
+		title: 'Desarrollo de software',
+		description: 'Desarrollamos software a la medida de tus necesidades',
+		image: 'https://via.placeholder.com/150',
+		href: '/software',
+	},
+];
+---
+
+<div class="space-y-5">
+	{cardItems.map((card) => <ServiceCard {...card} />)}
+	<h2 class="text-center text-2xl font-bold">Próximamente más servicios</h2>
+</div>

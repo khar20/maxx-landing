@@ -2,8 +2,36 @@
 import SocialPill from './SocialPill.astro';
 ---
 
-<div class="max-w-2xl border border-black rounded-3xl mx-auto">
-	<p class="font-mono">Desarrollamos software para tu negocio!</p>
-	<SocialPill href="https://twitter.com/astrodotbuild"> Twitter </SocialPill>
-	<SocialPill href=""> Facebook </SocialPill>
+<div class="mx-auto max-w-3xl rounded-3xl border border-black p-10">
+	<div class="container">
+		<p id="type" class="w-max overflow-hidden border-r-5 border-blue-700 pr-2 font-mono whitespace-nowrap">
+			Desarrollamos software a la medidad para tu negocio!
+		</p>
+	</div>
+	<div class="mt-4 flex gap-4">
+		<SocialPill href=""> Contáctanos </SocialPill>
+	</div>
 </div>
+
+<style>
+	#type {
+		animation:
+			typing 2s steps(52),
+			cursor 0.4s step-end infinite alternate;
+	}
+
+	@keyframes typing {
+		from {
+			width: 0;
+		}
+		to {
+			width: 100%;
+		}
+	}
+
+	@keyframes cursor {
+		50% {
+			border-color: transparent;
+		}
+	}
+</style>
