@@ -2,7 +2,32 @@
 
 ---
 
-<h3 class="group relative mx-8 my-10 pb-2 text-left text-5xl font-extrabold md:text-[64px] dark:text-white">
+<h3 id="animated-heading" class="relative mx-8 my-10 pb-2 text-left text-5xl font-extrabold dark:text-white">
 	<slot />
-	<span class="absolute bottom-0 left-0 h-1 w-0 bg-black transition-all duration-500 group-hover:w-full dark:bg-white"></span>
+	<span class="absolute bottom-0 left-0 block h-1 w-0 bg-black transition-all duration-1000 ease-in-out dark:bg-white"></span>
 </h3>
+
+<script is:inline>
+	document.addEventListener('DOMContentLoaded', () => {
+		const heading = document.getElementById('animated-heading');
+		const underline = heading.querySelector('span');
+
+		const observerOptions = {
+			root: null,
+			threshold: 0.6,
+		};
+
+		const observerCallback = (entries, observer) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					underline.style.width = '100%';
+				} else {
+					underline.style.width = '0';
+				}
+			});
+		};
+
+		const observer = new IntersectionObserver(observerCallback, observerOptions);
+		observer.observe(heading);
+	});
+</script>

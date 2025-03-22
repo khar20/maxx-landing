@@ -11,6 +11,9 @@ importers:
       '@fontsource-variable/roboto-mono':
         specifier: ^5.2.5
         version: 5.2.5
+      '@fontsource-variable/rubik':
+        specifier: ^5.2.5
+        version: 5.2.5
       '@tailwindcss/vite':
         specifier: ^4.0.15
         version: 4.0.15(vite@6.2.2(jiti@2.4.2)(lightningcss@1.29.2))
@@ -222,6 +225,9 @@ packages:
 
   '@fontsource-variable/roboto-mono@5.2.5':
     resolution: {integrity: sha512-JsvF7AvjgqGBKCtVuBE5rdYrTdx8yY61Ralo0n6wnlWLCtYAHnj7NjHmpWWvSq9ROKByRfropM7VyeO0a66M3Q==}
+
+  '@fontsource-variable/rubik@5.2.5':
+    resolution: {integrity: sha512-6tXqnHFA9/ItIEODfH5LrzLSmcNE5TXD8OuXx14cvmS7j1zX4JgEHjYrhlWhLGuBXXzrOnz0A0oMheMMbXwmWA==}
 
   '@img/sharp-darwin-arm64@0.33.5':
     resolution: {integrity: sha512-UT4p+iz/2H4twwAoLCqfA9UH5pI6DggwKEGuaPy7nCVQ8ZsiY5PIcrRvD1DzuY3qYL07NtIQcWnBSY/heikIFQ==}
@@ -1751,6 +1757,8 @@ snapshots:
     optional: true
 
   '@fontsource-variable/roboto-mono@5.2.5': {}
+
+  '@fontsource-variable/rubik@5.2.5': {}
 
   '@img/sharp-darwin-arm64@0.33.5':
     optionalDependencies:
