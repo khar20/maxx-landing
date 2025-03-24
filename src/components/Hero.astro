@@ -1,15 +1,18 @@
 ---
-import SocialPill from './SocialPill.astro';
+import HeroPill from './HeroPill.astro';
 ---
 
-<div class="mx-auto rounded-3xl border border-black p-10">
-	<div class="container">
-		<p id="type" class="w-max overflow-hidden border-r-5 border-blue-700 pr-2 font-mono whitespace-nowrap">
-			Desarrollamos software a la medidad para tu negocio!
-		</p>
+<div class="mx-auto max-h- grid grid-cols-2 gap-6 rounded-3xl border border-black p-10 backdrop-blur-sm dark:border-white/10 dark:bg-white/20">
+	<div class="h-max space-y-4 dark:text-white">
+		<h1 id="type" class="max-w-fit border-r-5 border-blue-700 pr-1 font-mono text-3xl md:text-4xl overflow-hidden whitespace-nowrap">Software a la medida, IMPACTO MÁXIMO</h1>
+		<p class="text-xl md:text-2xl">Potencia tu negocio con soluciones tecnólogicas personalizadas y abre nuevas oportunidades</p>
+		<div class="flex gap-2">
+			<HeroPill href="#services"> Nuestros servicios </HeroPill>
+			<HeroPill href=""> Contáctanos </HeroPill>
+		</div>
 	</div>
-	<div class="mt-4 flex gap-4">
-		<SocialPill href=""> Contáctanos </SocialPill>
+	<div class="flex items-center justify-center">
+		<img src="https://via.placeholder.com/300" alt="Software a la medida" class="h-2xl w-2xl rounded-md object-cover" />
 	</div>
 </div>
 
