@@ -2,7 +2,8 @@
 	"singleQuote": true,
 	"useTabs": true,
 	"tabWidth": 4,
-	"printWidth": 150,
+	"printWidth": 100,
+	"singleAttributePerLine": true,
 	"plugins": ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
 	"tailwindStylesheet": "./src/styles/global.css",
 	"overrides": [
