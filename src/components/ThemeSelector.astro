@@ -6,12 +6,25 @@ import SystemIcon from './icons/System.astro';
 const THEMES = ['Light', 'Dark', 'System'];
 ---
 
-<div class="relative mr-1 ml-1">
-	<button transition:persist id="theme-toggle-btn" class="flex appearance-none border-none transition hover:scale-125">
+<div class="relative mx-1">
+	<button
+		transition:persist
+		id="theme-toggle-btn"
+		class="flex appearance-none border-none transition hover:scale-125"
+	>
 		<span class="sr-only">Elige el tema</span>
-		<SunIcon id="light" class="theme-toggle-icon size-5 transition-all" />
-		<MoonIcon id="dark" class="theme-toggle-icon absolute size-5 transition-all" />
-		<SystemIcon id="system" class="theme-toggle-icon absolute size-5 transition-all" />
+		<SunIcon
+			id="light"
+			class="theme-toggle-icon size-5 transition-all"
+		/>
+		<MoonIcon
+			id="dark"
+			class="theme-toggle-icon absolute size-5 transition-all"
+		/>
+		<SystemIcon
+			id="system"
+			class="theme-toggle-icon absolute size-5 transition-all"
+		/>
 	</button>
 	<div
 		transition:persist
@@ -78,7 +91,8 @@ const THEMES = ['Light', 'Dark', 'System'];
 		};
 
 		const themePreference = getThemePreference();
-		const isDark = themePreference === 'dark' || (themePreference === 'system' && matchMedia.matches);
+		const isDark =
+			themePreference === 'dark' || (themePreference === 'system' && matchMedia.matches);
 
 		updateIcon(themePreference);
 		document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
