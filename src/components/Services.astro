@@ -1,6 +1,7 @@
 ---
 import ServiceCard from '@components/ServiceCard.astro';
 import TitleSection from './TitleSection.astro';
+
 const cardItems = [
 	{
 		title: 'Desarrollo de Soluciones Web',
@@ -29,6 +30,8 @@ const cardItems = [
 	<TitleSection class="text-center"> Servicios </TitleSection>
 	<div class="grid gap-2 md:grid-cols-2">
 		{cardItems.map((card) => <ServiceCard {...card} />)}
-		<h2 class="text-center text-2xl font-bold">Próximamente más servicios</h2>
+		<h2 class="text-center text-2xl font-bold">
+			Próximamente más servicios
+		</h2>
 	</div>
 </div>

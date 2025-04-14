@@ -4,91 +4,166 @@ import Header from '@components/Header.astro';
 import SectionContainer from '@components/SectionContainer.astro';
 import Footer from '@components/Footer.astro';
 
-import PricingHeader from "@components/PricingHeader.astro";
-import PricingSegmentSelector from "@components/PricingSegmentSelector.astro";
-import PricingCard from "@components/PricingCard.astro";
-import BusinessAdvantages from "@components/BusinessAdvantages.astro"; // Importamos el nuevo componente
-import FAQ from "@components/FAQ.astro";
-import CustomPlan from "@components/CustomPlan.astro";
+import PricingHeader from '@components/PricingHeader.astro';
+import PricingSegmentSelector from '@components/PricingSegmentSelector.astro';
+import PricingCard from '@components/PricingCard.astro';
+import BusinessAdvantages from '@components/BusinessAdvantages.astro';
+import FAQ from '@components/FAQ.astro';
+import CustomPlan from '@components/CustomPlan.astro';
 
-import { personalPlans, empresarialPlans, faqs } from "../utils/pricingData";
-import type { ColorOption } from "../components/PricingCard.astro";
+import type { ColorOption } from '../components/PricingCard.astro';
 
-// Obtener el segmento de la URL o usar "personal" como valor predeterminado
-const segment = Astro.url.searchParams.get('segment') === 'empresarial' ? 'empresarial' : 'personal';
+const segment =
+	Astro.url.searchParams.get('segment') === 'empresarial'
+		? 'empresarial'
+		: 'personal';
+
+const personalPlans = [
+	{
+		name: 'Plan Básico',
+		price: 29,
+		color: 'blue',
+		features: [
+			'5 proyectos',
+			'20GB de almacenamiento',
+			'Soporte por correo electrónico',
+			'Actualizaciones mensuales',
+		],
+	},
+	{
+		name: 'Plan Premium',
+		price: 79,
+		color: 'purple',
+		features: [
+			'15 proyectos',
+			'50GB de almacenamiento',
+			'Soporte prioritario',
+			'Actualizaciones semanales',
+			'Funciones avanzadas',
+		],
+	},
+];
+
+const empresarialPlans = [
+	{
+		name: 'Plan Básico Empresarial',
+		price: 99,
+		color: 'blue',
+		features: [
+			'15 proyectos',
+			'50GB de almacenamiento',
+			'Soporte prioritario',
+			'Actualizaciones semanales',
+			'Acceso para hasta 5 usuarios',
+			'Panel de administración',
+		],
+	},
+	{
+		name: 'Plan Premium Empresarial',
+		price: 199,
+		color: 'purple',
+		features: [
+			'Proyectos ilimitados',
+			'200GB de almacenamiento',
+			'Soporte 24/7',
+			'Actualizaciones diarias',
+			'Acceso para hasta 15 usuarios',
+			'API completa',
+			'Integración con sistemas empresariales',
+			'Asesoría personalizada',
+		],
+	},
+];
 ---
 
 <Layout>
-  <Header />
-  <main class="flex-1 text-gray-900 dark:border-white dark:bg-[#050814] dark:text-gray-200">
-    <SectionContainer
-      id="pricing"
-      class="flex min-h-screen w-full items-center justify-center from-[#0e173a] to-[#050814] px-4 py-12 md:py-24 lg:py-32 xl:py-48 dark:bg-linear-to-b"
-    >
-      <div class="container mx-auto px-4">
-        <PricingHeader/>
-        
-        <PricingSegmentSelector activeSegment={segment as "personal" | "empresarial"} />
-        
-        <!-- Contenedor para tarjetas personales -->
-        <div id="personal-pricing-cards" class={`grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-10 ${segment === 'personal' ? 'block' : 'hidden'}`}>
-          {personalPlans.map((plan, index) => (
-            <PricingCard 
-              name={plan.name}
-              price={plan.price}
-              color={plan.color as ColorOption}
-              features={plan.features}
-              isPopular={index === 1}
-              order={`segment-personal order-${index}`}
-            />
-          ))}
-        </div>
-        
-        <!-- Contenedor para tarjetas empresariales -->
-        <div id="empresarial-pricing-cards" class={`grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-10 ${segment === 'empresarial' ? 'block' : 'hidden'}`}>
-          {empresarialPlans.map((plan, index) => (
-            <PricingCard 
-              name={plan.name}
-              price={plan.price}
-              color={plan.color as ColorOption}
-              features={plan.features}
-              isPopular={index === 1}
-              order={`segment-empresarial order-${index}`}
-            />
-          ))}
-        </div>
-        
-        <!-- Usando el nuevo componente BusinessAdvantages -->
-        <BusinessAdvantages isVisible={segment === 'empresarial'} />
-        
-        <!-- Plan personalizado con ID específico -->
-        <div id="custom-plan-section" class="mt-16">
-          <CustomPlan segment={segment as "personal" | "empresarial"} />
-        </div>
-        
-        <!-- Sección de FAQ al final -->
-        <div class="mt-16">
-          <FAQ faqs={faqs} />
-        </div>
-      </div>
-    </SectionContainer>
-  </main>
-  <Footer />
+	<Header />
+	<main
+		class="flex-1 text-gray-900 dark:border-white dark:bg-[#050814] dark:text-gray-200"
+	>
+		<SectionContainer
+			id="pricing"
+			class="flex min-h-screen w-full items-center justify-center from-[#0e173a] to-[#050814] px-4 dark:bg-linear-to-b"
+		>
+			<div class="container mx-auto px-4">
+				<PricingHeader />
+
+				<div class="col-1 container justify-center">
+					<PricingSegmentSelector
+						activeSegment={segment as 'personal' | 'empresarial'}
+					/>
+
+					<div
+						id="personal-pricing-cards"
+						class={`grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-10 ${segment === 'personal' ? 'block' : 'hidden'}`}
+					>
+						{
+							personalPlans.map((plan, index) => (
+								<PricingCard
+									name={plan.name}
+									price={plan.price}
+									color={plan.color as ColorOption}
+									features={plan.features}
+									isPopular={index === 1}
+									order={`segment-personal order-${index}`}
+								/>
+							))
+						}
+					</div>
+
+					<div
+						id="empresarial-pricing-cards"
+						class={`grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-10 ${segment === 'empresarial' ? 'block' : 'hidden'}`}
+					>
+						{
+							empresarialPlans.map((plan, index) => (
+								<PricingCard
+									name={plan.name}
+									price={plan.price}
+									color={plan.color as ColorOption}
+									features={plan.features}
+									isPopular={index === 1}
+									order={`segment-empresarial order-${index}`}
+								/>
+							))
+						}
+					</div>
+				</div>
+
+				<BusinessAdvantages isVisible={segment === 'empresarial'} />
+
+				<div
+					id="custom-plan-section"
+					class="mt-16"
+				>
+					<CustomPlan
+						segment={segment as 'personal' | 'empresarial'}
+					/>
+				</div>
+
+				<div class="mt-16">
+					<FAQ />
+				</div>
+			</div>
+		</SectionContainer>
+	</main>
+	<Footer />
 </Layout>
 
 <script src="../scripts/pricingInteractions.ts"></script>
 
 <style>
-  @keyframes pulse {
-    0%, 100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.02);
-    }
-  }
-  
-  .popular-plan {
-    animation: pulse 2s infinite;
-  }
+	@keyframes pulse {
+		0%,
+		100% {
+			transform: scale(1);
+		}
+		50% {
+			transform: scale(1.02);
+		}
+	}
+
+	.popular-plan {
+		animation: pulse 2s infinite;
+	}
 </style>

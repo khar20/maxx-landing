@@ -1,22 +1,39 @@
 ---
-export interface Props {
-  faqs: {
-    question: string;
-    answer: string;
-  }[];
-}
-
-const { faqs } = Astro.props;
+const faqs = [
+	{
+		question: '¿Puedo cambiar de plan en cualquier momento?',
+		answer: 'Sí, puedes cambiar de plan en cualquier momento. Los cambios se aplicarán al inicio del siguiente ciclo de facturación.',
+	},
+	{
+		question: '¿Qué métodos de pago aceptan?',
+		answer: 'Aceptamos todas las tarjetas de crédito principales, PayPal y transferencias bancarias para planes empresariales.',
+	},
+	{
+		question: '¿Ofrecen período de prueba?',
+		answer: 'Sí, todos nuestros planes incluyen un período de prueba gratuito de 14 días sin compromiso.',
+	},
+	{
+		question: '¿Puedo cancelar en cualquier momento?',
+		answer: 'Absolutamente. No hay contratos a largo plazo ni penalizaciones por cancelación. Puedes cancelar tu suscripción cuando lo necesites.',
+	},
+	{
+		question:
+			'¿La versión empresarial incluye soporte para todos los usuarios?',
+		answer: 'Sí, todos los usuarios registrados en la cuenta empresarial tienen acceso al soporte técnico según el nivel contratado.',
+	},
+];
 ---
 
 <div class="mt-24">
-  <h2 class="text-3xl font-bold text-center mb-12">¿Preguntas Frecuentes?</h2>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-    {faqs.map(faq => (
-      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-        <h3 class="text-xl font-semibold mb-3">{faq.question}</h3>
-        <p class="text-gray-600 dark:text-gray-400">{faq.answer}</p>
-      </div>
-    ))}
-  </div>
+	<h2 class="mb-12 text-center text-3xl font-bold">¿Preguntas Frecuentes?</h2>
+	<div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+		{
+			faqs.map((faq) => (
+				<div class="rounded-lg bg-white p-6 shadow-md dark:bg-gray-800">
+					<h3 class="mb-3 text-xl font-semibold">{faq.question}</h3>
+					<p class="text-gray-600 dark:text-gray-400">{faq.answer}</p>
+				</div>
+			))
+		}
+	</div>
 </div>

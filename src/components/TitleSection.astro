@@ -3,9 +3,14 @@
 ---
 
 <div class="my-2">
-	<h2 id="animated-heading" class="relative pb-2 text-left text-3xl font-extrabold md:text-4xl dark:text-white">
+	<h2
+		id="animated-heading"
+		class="relative pb-2 text-left text-3xl font-extrabold md:text-4xl dark:text-white"
+	>
 		<slot />
-		<span class="absolute bottom-0 left-0 block h-1 w-0 bg-black transition-all duration-1000 ease-in-out dark:bg-white"></span>
+		<span
+			class="absolute bottom-0 left-0 block h-1 w-0 bg-black transition-all duration-1000 ease-in-out dark:bg-white"
+		></span>
 	</h2>
 </div>
 
@@ -29,7 +34,10 @@
 			});
 		};
 
-		const observer = new IntersectionObserver(observerCallback, observerOptions);
+		const observer = new IntersectionObserver(
+			observerCallback,
+			observerOptions
+		);
 		observer.observe(heading);
 	});
 </script>

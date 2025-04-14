@@ -1,69 +1,95 @@
 ---
-export type ColorOption = "blue" | "purple" | "teal";
+export type ColorOption = 'blue' | 'purple' | 'teal';
 
 export interface Props {
-  name: string;
-  price: number;
-  color: ColorOption;
-  features: string[];
-  isPopular?: boolean;
-  order?: string; // 👈 nuevo
+	name: string;
+	price: number;
+	color: ColorOption;
+	features: string[];
+	isPopular?: boolean;
+	order?: string; // 👈 nuevo
 }
 
-const { name, price, color, features, isPopular = false, order = "" } = Astro.props;
+const {
+	name,
+	price,
+	color,
+	features,
+	isPopular = false,
+	order = '',
+} = Astro.props;
 
 // Define clases por color
-const colorClasses: Record<ColorOption, {bg: string, text: string, button: string}> = {
-  blue: {
-    bg: "bg-blue-100 dark:bg-blue-900",
-    text: "text-blue-700 dark:text-blue-300",
-    button: "bg-blue-600 hover:bg-blue-700"
-  },
-  purple: {
-    bg: "bg-purple-100 dark:bg-purple-900",
-    text: "text-purple-700 dark:text-purple-300",
-    button: "bg-purple-600 hover:bg-purple-700"
-  },
-  teal: {
-    bg: "bg-teal-100 dark:bg-teal-900",
-    text: "text-teal-700 dark:text-teal-300",
-    button: "bg-teal-600 hover:bg-teal-700"
-  }
+const colorClasses: Record<
+	ColorOption,
+	{ bg: string; text: string; button: string }
+> = {
+	blue: {
+		bg: 'bg-blue-100 dark:bg-blue-900',
+		text: 'text-blue-700 dark:text-blue-300',
+		button: 'bg-blue-600 hover:bg-blue-700',
+	},
+	purple: {
+		bg: 'bg-purple-100 dark:bg-purple-900',
+		text: 'text-purple-700 dark:text-purple-300',
+		button: 'bg-purple-600 hover:bg-purple-700',
+	},
+	teal: {
+		bg: 'bg-teal-100 dark:bg-teal-900',
+		text: 'text-teal-700 dark:text-teal-300',
+		button: 'bg-teal-600 hover:bg-teal-700',
+	},
 };
 
 const classes = colorClasses[color];
 ---
 
-<div class={`bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 ${isPopular ? 'transform scale-105 z-10 border-2 border-purple-500' : ''} ${order}`}>
-  {isPopular && (
-    <div class="absolute top-0 right-0 animate-pulse">
-      <span class="bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
-        POPULAR
-      </span>
-    </div>
-  )}  
-  <div class={classes.bg + " p-6"}>
-    <h3 class={`text-2xl font-bold text-center ${classes.text}`}>{name}</h3>
-    <div class="mt-4 text-center">
-      <span class="text-5xl font-bold">${price}</span>
-      <span class="text-gray-600 dark:text-gray-400">/mes</span>
-    </div>
-  </div>
-  <div class="p-6">
-    <ul class="space-y-4">
-      {features.map(feature => (
-        <li class="flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-          </svg>
-          <span>{feature}</span>
-        </li>
-      ))}
-    </ul>
-    <div class="mt-8">
-      <a href="#" class={`block w-full ${classes.button} text-white font-semibold py-3 px-4 rounded-lg text-center transition duration-300`}>
-        Comenzar ahora
-      </a>
-    </div>
-  </div>
+<div
+	class={`bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 ${isPopular ? 'transform scale-105 z-10 border-2 border-purple-500' : ''} ${order}`}
+>
+	{
+		isPopular && (
+			<div class="absolute top-0 right-0 rounded-tr-lg rounded-bl-lg bg-purple-500 px-3 py-1 text-xs font-bold text-white">
+				<p class="animate-pulse">POPULAR</p>
+			</div>
+		)
+	}
+	<div class={classes.bg + ' p-6'}>
+		<h3 class={`text-2xl font-bold text-center ${classes.text}`}>{name}</h3>
+		<div class="mt-4 text-center">
+			<span class="text-5xl font-bold">${price}</span>
+			<span class="text-gray-600 dark:text-gray-400">/mes</span>
+		</div>
+	</div>
+	<div class="p-6">
+		<ul class="space-y-4">
+			{
+				features.map((feature) => (
+					<li class="flex items-center">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="mr-2 h-5 w-5 text-green-500"
+							viewBox="0 0 20 20"
+							fill="currentColor"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+						<span>{feature}</span>
+					</li>
+				))
+			}
+		</ul>
+		<div class="mt-8">
+			<a
+				href="#"
+				class={`block w-full ${classes.button} text-white font-semibold py-3 px-4 rounded-lg text-center transition duration-300`}
+			>
+				Comenzar ahora
+			</a>
+		</div>
+	</div>
 </div>

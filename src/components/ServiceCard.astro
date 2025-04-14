@@ -2,8 +2,14 @@
 const { title, description, image } = Astro.props;
 ---
 
-<div class="border border-black p-5 transition-all duration-100 ease-in-out dark:border-white hover:bg-gray-100 dark:hover:bg-gray-800">
+<div
+	class="border border-black p-5 transition-all duration-100 ease-in-out hover:bg-gray-100 dark:border-white dark:hover:bg-gray-800"
+>
 	<h1 class="text-2xl font-bold">{title}</h1>
 	<p>{description}</p>
-	<img src={image} alt={title} class="h-48 w-full rounded-t-md object-cover" />
+	<img
+		src={image}
+		alt={title}
+		class="h-48 w-full rounded-t-md object-cover"
+	/>
 </div>
