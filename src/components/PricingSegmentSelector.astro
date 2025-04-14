@@ -1,0 +1,32 @@
+---
+export interface Props {
+  activeSegment: "personal" | "empresarial";
+}
+
+const { activeSegment } = Astro.props;
+---
+
+<div class="flex justify-center mb-10">
+  <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded-lg inline-flex">
+    <a 
+      href="/pricing?segment=personal" 
+      class={`segment-btn px-6 py-3 rounded-md text-sm font-medium transition-colors duration-200 ${
+        activeSegment === "personal" 
+          ? "bg-white dark:bg-gray-800 shadow text-blue-600 dark:text-blue-400" 
+          : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
+      }`}
+    >
+      Personal
+    </a>
+    <a 
+      href="/pricing?segment=empresarial" 
+      class={`segment-btn px-6 py-3 rounded-md text-sm font-medium transition-colors duration-200 ${
+        activeSegment === "empresarial" 
+          ? "bg-white dark:bg-gray-800 shadow text-blue-600 dark:text-blue-400" 
+          : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
+      }`}
+    >
+      Empresarial
+    </a>
+  </div>
+</div>

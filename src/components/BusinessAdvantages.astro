@@ -1,0 +1,31 @@
+---
+export interface Props {
+  isVisible: boolean;
+}
+
+const { isVisible } = Astro.props;
+
+// Lista de ventajas empresariales
+const advantages = [
+  "Facturación consolidada para todo tu equipo",
+  "Panel de administración centralizado",
+  "Reportes avanzados de uso y rendimiento",
+  "Controles de acceso y permisos personalizables"
+];
+---
+
+<div id="business-advantages" class={isVisible ? 'block' : 'hidden'}>
+  <div class="mt-12 bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg max-w-4xl mx-auto">
+    <h3 class="text-xl font-semibold text-blue-800 dark:text-blue-300 mb-4">Ventajas Empresariales</h3>
+    <ul class="space-y-3">
+      {advantages.map(advantage => (
+        <li class="flex items-start">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500 mr-2 mt-1" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg>
+          <span>{advantage}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>
