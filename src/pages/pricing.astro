@@ -5,7 +5,6 @@ import SectionContainer from '@components/SectionContainer.astro';
 import Footer from '@components/Footer.astro';
 
 import PricingHeader from '@components/PricingHeader.astro';
-import PricingSegmentSelector from '@components/PricingSegmentSelector.astro';
 import PricingCard from '@components/PricingCard.astro';
 import BusinessAdvantages from '@components/BusinessAdvantages.astro';
 import FAQ from '@components/FAQ.astro';
@@ -13,10 +12,8 @@ import CustomPlan from '@components/CustomPlan.astro';
 
 import type { ColorOption } from '../components/PricingCard.astro';
 
-const segment =
-	Astro.url.searchParams.get('segment') === 'empresarial'
-		? 'empresarial'
-		: 'personal';
+// Establecemos un segmento inicial para el renderizado inicial
+const initialSegment = Astro.url.searchParams.get('segment') === 'empresarial' ? 'empresarial' : 'personal';
 
 const personalPlans = [
 	{
@@ -24,10 +21,11 @@ const personalPlans = [
 		price: 29,
 		color: 'blue',
 		features: [
-			'5 proyectos',
-			'20GB de almacenamiento',
-			'Soporte por correo electrónico',
-			'Actualizaciones mensuales',
+			'1 landing page',
+			'Dominio personalizado',
+			'Formulario de contacto',
+			'Diseño adaptable (responsivo)',
+			'Soporte por correo electronico',
 		],
 	},
 	{
@@ -35,11 +33,12 @@ const personalPlans = [
 		price: 79,
 		color: 'purple',
 		features: [
-			'15 proyectos',
-			'50GB de almacenamiento',
+			'3 landing pages',
+			'Dominio personalizado',
+			'Formulario de contacto',
+			'Diseño adaptable (responsivo)',
+			'Análisis de Visitantes',
 			'Soporte prioritario',
-			'Actualizaciones semanales',
-			'Funciones avanzadas',
 		],
 	},
 ];
@@ -50,12 +49,12 @@ const empresarialPlans = [
 		price: 99,
 		color: 'blue',
 		features: [
-			'15 proyectos',
-			'50GB de almacenamiento',
-			'Soporte prioritario',
-			'Actualizaciones semanales',
-			'Acceso para hasta 5 usuarios',
-			'Panel de administración',
+			'3 landing pages',
+			'Dominio personalizado',
+			'Formulario de contacto',
+			'Diseño adaptable (responsivo)',
+			'Soporte telefónico',
+			'Logo e imagen corporativa',
 		],
 	},
 	{
@@ -63,14 +62,13 @@ const empresarialPlans = [
 		price: 199,
 		color: 'purple',
 		features: [
-			'Proyectos ilimitados',
-			'200GB de almacenamiento',
-			'Soporte 24/7',
-			'Actualizaciones diarias',
-			'Acceso para hasta 15 usuarios',
-			'API completa',
-			'Integración con sistemas empresariales',
-			'Asesoría personalizada',
+			'5 landing pages',
+			'Dominio personalizado',
+			'Formulario de contacto',
+			'Análisis de visitantes',
+			'Soporte prioritario',
+			'Integraciones API personalizadas',
+			'Reuniones mensuales de seguimiento',
 		],
 	},
 ];
@@ -89,13 +87,30 @@ const empresarialPlans = [
 				<PricingHeader />
 
 				<div class="col-1 container justify-center">
-					<PricingSegmentSelector
-						activeSegment={segment as 'personal' | 'empresarial'}
-					/>
+					<!-- Selector de segmento con botones que usan JavaScript -->
+					<div class="flex justify-center mb-10">
+						<div class="inline-flex p-1 rounded-lg bg-gray-100 dark:bg-gray-800">
+							<button
+								id="personal-tab"
+								class={`px-4 py-2 rounded-md ${initialSegment === 'personal' ? 'bg-white dark:bg-gray-700 shadow-sm' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'}`}
+								data-segment="personal"
+							>
+								Personal
+							</button>
+							<button
+								id="empresarial-tab"
+								class={`px-4 py-2 rounded-md ${initialSegment === 'empresarial' ? 'bg-white dark:bg-gray-700 shadow-sm' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'}`}
+								data-segment="empresarial"
+							>
+								Empresarial
+							</button>
+						</div>
+					</div>
 
+					<!-- Tarjetas de precios personales -->
 					<div
 						id="personal-pricing-cards"
-						class={`grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-10 ${segment === 'personal' ? 'block' : 'hidden'}`}
+						class={`grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-10 ${initialSegment === 'personal' ? 'block' : 'hidden'}`}
 					>
 						{
 							personalPlans.map((plan, index) => (
@@ -111,9 +126,10 @@ const empresarialPlans = [
 						}
 					</div>
 
+					<!-- Tarjetas de precios empresariales -->
 					<div
 						id="empresarial-pricing-cards"
-						class={`grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-10 ${segment === 'empresarial' ? 'block' : 'hidden'}`}
+						class={`grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-10 ${initialSegment === 'empresarial' ? 'block' : 'hidden'}`}
 					>
 						{
 							empresarialPlans.map((plan, index) => (
@@ -130,18 +146,16 @@ const empresarialPlans = [
 					</div>
 				</div>
 
-				<BusinessAdvantages isVisible={segment === 'empresarial'} />
-
-				<div
-					id="custom-plan-section"
-					class="mt-16"
-				>
-					<CustomPlan
-						segment={segment as 'personal' | 'empresarial'}
-					/>
+				<!-- Ventajas empresariales - important: we simply pass the isVisible prop -->
+				<div id="business-advantages-container" class="mt-16">
+					<BusinessAdvantages isVisible={initialSegment === 'empresarial'} />
 				</div>
 
-				<div class="mt-16">
+				<div id="custom-plan-section" class="mt-16">
+					<CustomPlan segment={initialSegment as 'personal' | 'empresarial'} />
+				</div>
+
+				<div class="mt-16 mb-10"> 
 					<FAQ />
 				</div>
 			</div>
@@ -150,7 +164,100 @@ const empresarialPlans = [
 	<Footer />
 </Layout>
 
-<script src="../scripts/pricingInteractions.ts"></script>
+<script>
+	// JavaScript para manejar el cambio de pestañas sin recargar la página
+	document.addEventListener('DOMContentLoaded', () => {
+		const personalTab = document.getElementById('personal-tab');
+		const empresarialTab = document.getElementById('empresarial-tab');
+		const personalCards = document.getElementById('personal-pricing-cards');
+		const empresarialCards = document.getElementById('empresarial-pricing-cards');
+		const customPlanSection = document.getElementById('custom-plan-section');
+
+		// Función para cambiar entre segmentos
+		function switchSegment(segment: 'personal' | 'empresarial'): void {
+			// Verificar que los elementos existan antes de usarlos
+			if (!personalTab || !empresarialTab || !personalCards || !empresarialCards) {
+				console.error('No se encontraron algunos elementos necesarios en el DOM');
+				return;
+			}
+
+			// Actualizar estado visual de las pestañas
+			if (segment === 'personal') {
+				personalTab.classList.add('bg-white', 'dark:bg-gray-700', 'shadow-sm');
+				personalTab.classList.remove('text-gray-500', 'hover:text-gray-700', 'dark:hover:text-gray-300');
+				
+				empresarialTab.classList.remove('bg-white', 'dark:bg-gray-700', 'shadow-sm');
+				empresarialTab.classList.add('text-gray-500', 'hover:text-gray-700', 'dark:hover:text-gray-300');
+				
+				// Mostrar/ocultar las tarjetas correspondientes
+				personalCards.classList.remove('hidden');
+				personalCards.classList.add('block');
+				empresarialCards.classList.remove('block');
+				empresarialCards.classList.add('hidden');
+				
+				// Ocultar BusinessAdvantages - tenemos que encontrar el div interno con id="business-advantages"
+				const businessAdvantagesInner = document.querySelector('#business-advantages');
+				if (businessAdvantagesInner) {
+					businessAdvantagesInner.classList.remove('block');
+					businessAdvantagesInner.classList.add('hidden');
+				}
+				
+				// Actualizar el plan personalizado
+				updateCustomPlan('personal');
+			} else {
+				empresarialTab.classList.add('bg-white', 'dark:bg-gray-700', 'shadow-sm');
+				empresarialTab.classList.remove('text-gray-500', 'hover:text-gray-700', 'dark:hover:text-gray-300');
+				
+				personalTab.classList.remove('bg-white', 'dark:bg-gray-700', 'shadow-sm');
+				personalTab.classList.add('text-gray-500', 'hover:text-gray-700', 'dark:hover:text-gray-300');
+				
+				// Mostrar/ocultar las tarjetas correspondientes
+				empresarialCards.classList.remove('hidden');
+				empresarialCards.classList.add('block');
+				personalCards.classList.remove('block');
+				personalCards.classList.add('hidden');
+				
+				// Mostrar BusinessAdvantages - tenemos que encontrar el div interno con id="business-advantages"
+				const businessAdvantagesInner = document.querySelector('#business-advantages');
+				if (businessAdvantagesInner) {
+					businessAdvantagesInner.classList.remove('hidden');
+					businessAdvantagesInner.classList.add('block');
+				}
+				
+				// Actualizar el plan personalizado
+				updateCustomPlan('empresarial');
+			}
+		}
+
+		// Función para actualizar el plan personalizado 
+		function updateCustomPlan(segment: 'personal' | 'empresarial'): void {
+			// Actualiza el componente CustomPlan según sea necesario
+			const customPlanElement = document.querySelector('#custom-plan-section');
+			if (customPlanElement) {
+				const customPlanTitle = customPlanElement.querySelector('h2');
+				const customPlanDescription = customPlanElement.querySelector('p');
+				
+				if (customPlanTitle) {
+					customPlanTitle.textContent = segment === 'personal' 
+						? "¿Necesitas un plan personalizado?" 
+						: "¿Buscas una solución a medida para tu empresa?";
+				}
+				
+				if (customPlanDescription) {
+					customPlanDescription.textContent = segment === 'personal'
+						? "Contacta con nuestro equipo para crear un plan adaptado específicamente a tus necesidades."
+						: "Nuestro equipo de consultores empresariales puede diseñar una solución específica que se adapte al tamaño y necesidades de tu organización.";
+				}
+			}
+		}
+
+		// Agregar event listeners a las pestañas
+		if (personalTab && empresarialTab) {
+			personalTab.addEventListener('click', () => switchSegment('personal'));
+			empresarialTab.addEventListener('click', () => switchSegment('empresarial'));
+		}
+	});
+</script>
 
 <style>
 	@keyframes pulse {
