@@ -64,63 +64,56 @@ const THEMES = ['Light', 'Dark', 'System'];
 </style>
 
 <script is:inline>
-	let remove = null;
-	const matchMedia = window.matchMedia('(prefers-color-scheme: dark)');
 	const themesMenu = document.getElementById('themes-menu');
+	const toggleBtn = document.getElementById('theme-toggle-btn');
+	const themeIcons = document.querySelectorAll('.theme-toggle-icon');
+	const themeOptions = document.querySelectorAll('.themes-menu-option');
+	const matchMedia = window.matchMedia('(prefers-color-scheme: dark)');
+
+	let removeListener = null;
 
 	const getThemePreference = () => {
-		if (typeof localStorage !== 'undefined') {
-			return localStorage.getItem('theme') ?? 'system';
-		}
-
-		return window.matchMedia('(prefers-color-scheme: dark)').matches
-			? 'dark'
-			: 'light';
+		return localStorage.getItem('theme') ?? 'system';
 	};
 
-	const updateIcon = (themePreference) => {
-		document.querySelectorAll('.theme-toggle-icon').forEach((element) => {
-			element.style.scale = element.id === themePreference ? '1' : '0';
+	const updateIcon = (theme) => {
+		themeIcons.forEach((icon) => {
+			icon.style.scale = icon.id === theme ? '1' : '0';
 		});
 	};
 
-	const updateTheme = () => {
-		if (remove != null) {
-			remove();
-		}
-		matchMedia.addEventListener('change', updateTheme);
-		remove = () => {
-			matchMedia.removeEventListener('change', updateTheme);
-		};
-
-		const themePreference = getThemePreference();
+	const applyTheme = () => {
+		const theme = getThemePreference();
 		const isDark =
-			themePreference === 'dark' ||
-			(themePreference === 'system' && matchMedia.matches);
+			theme === 'dark' || (theme === 'system' && matchMedia.matches);
+		document.documentElement.classList.toggle('dark', isDark);
+		updateIcon(theme);
+	};
 
-		updateIcon(themePreference);
-		document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
+	const updateTheme = () => {
+		if (removeListener) removeListener();
+		matchMedia.addEventListener('change', applyTheme);
+		removeListener = () =>
+			matchMedia.removeEventListener('change', applyTheme);
+		applyTheme();
 	};
 
 	updateTheme();
 
-	document.addEventListener('click', () =>
-		themesMenu.classList.remove('open')
-	);
+	toggleBtn.addEventListener('click', (e) => {
+		e.stopPropagation();
+		themesMenu.classList.toggle('open');
+	});
 
-	document
-		.getElementById('theme-toggle-btn')
-		.addEventListener('click', (e) => {
-			e.stopPropagation();
-			const isClosed = !themesMenu.classList.contains('open');
-			themesMenu.classList[isClosed ? 'add' : 'remove']('open');
-		});
+	document.addEventListener('click', () => {
+		themesMenu.classList.remove('open');
+	});
 
-	document.querySelectorAll('.themes-menu-option').forEach((element) => {
-		element.addEventListener('click', (e) => {
+	themeOptions.forEach((option) => {
+		option.addEventListener('click', () => {
 			localStorage.setItem(
 				'theme',
-				e.target.innerText.toLowerCase().trim()
+				option.textContent.trim().toLowerCase()
 			);
 			updateTheme();
 		});

@@ -12,7 +12,6 @@ import CustomPlan from '@components/CustomPlan.astro';
 
 import type { ColorOption } from '@components/PricingCard.astro';
 import PricingSegmentSelector from '@components/PricingSegmentSelector.astro';
-import Contact from '@components/Contact.astro';
 
 // Establecemos un segmento inicial para el renderizado inicial
 const initialSegment =
@@ -93,6 +92,7 @@ const empresarialPlans = [
 				<PricingHeader />
 
 				<div class="col-1 container justify-center">
+
 					<!-- selector -->
 					<PricingSegmentSelector
 						id="pricing-segment-selector"
@@ -161,27 +161,26 @@ const empresarialPlans = [
 				</div>
 			</div>
 		</SectionContainer>
-		<SectionContainer
-			id="contact"
-			class="flex items-center justify-center p-4"
-		>
-			<Contact />
-		</SectionContainer>
 	</main>
 	<Footer />
 </Layout>
 
 <script>
+	// JavaScript para manejar el cambio de pestañas sin recargar la página
 	document.addEventListener('astro:page-load', () => {
 		const personalTab = document.getElementById('personal-tab');
 		const empresarialTab = document.getElementById('empresarial-tab');
 		const personalCards = document.getElementById('personal-plans');
-		const empresarialCards = document.getElementById('business-plans');
+		const empresarialCards = document.getElementById(
+			'business-plans'
+		);
 		const customPlanSection = document.getElementById(
 			'custom-plan-section'
 		);
 
+		// Función para cambiar entre segmentos
 		function switchSegment(segment: 'personal' | 'empresarial'): void {
+			// Verificar que los elementos existan antes de usarlos
 			if (
 				!personalTab ||
 				!empresarialTab ||
@@ -194,6 +193,7 @@ const empresarialPlans = [
 				return;
 			}
 
+			// Actualizar estado visual de las pestañas
 			if (segment === 'personal') {
 				personalTab.classList.add(
 					'bg-white',
@@ -217,11 +217,13 @@ const empresarialPlans = [
 					'dark:hover:text-gray-300'
 				);
 
+				// Mostrar/ocultar las tarjetas correspondientes
 				personalCards.classList.remove('hidden');
 				personalCards.classList.add('block');
 				empresarialCards.classList.remove('block');
 				empresarialCards.classList.add('hidden');
 
+				// Ocultar BusinessAdvantages - tenemos que encontrar el div interno con id="business-advantages"
 				const businessAdvantagesInner = document.querySelector(
 					'#business-advantages'
 				);
@@ -230,6 +232,7 @@ const empresarialPlans = [
 					businessAdvantagesInner.classList.add('hidden');
 				}
 
+				// Actualizar el plan personalizado
 				updateCustomPlan('personal');
 			} else {
 				empresarialTab.classList.add(
@@ -254,11 +257,13 @@ const empresarialPlans = [
 					'dark:hover:text-gray-300'
 				);
 
+				// Mostrar/ocultar las tarjetas correspondientes
 				empresarialCards.classList.remove('hidden');
 				empresarialCards.classList.add('block');
 				personalCards.classList.remove('block');
 				personalCards.classList.add('hidden');
 
+				// Mostrar BusinessAdvantages - tenemos que encontrar el div interno con id="business-advantages"
 				const businessAdvantagesInner = document.querySelector(
 					'#business-advantages'
 				);
@@ -267,11 +272,14 @@ const empresarialPlans = [
 					businessAdvantagesInner.classList.add('block');
 				}
 
+				// Actualizar el plan personalizado
 				updateCustomPlan('empresarial');
 			}
 		}
 
+		// Función para actualizar el plan personalizado
 		function updateCustomPlan(segment: 'personal' | 'empresarial'): void {
+			// Actualiza el componente CustomPlan según sea necesario
 			const customPlanElement = document.querySelector(
 				'#custom-plan-section'
 			);
@@ -296,6 +304,7 @@ const empresarialPlans = [
 			}
 		}
 
+		// Agregar event listeners a las pestañas
 		if (personalTab && empresarialTab) {
 			personalTab.addEventListener('click', () =>
 				switchSegment('personal')

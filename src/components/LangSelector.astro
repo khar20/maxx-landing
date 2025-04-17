@@ -1,31 +1,40 @@
 ---
 import Language from './icons/Language.astro';
-
-const LANGUAGES = ['Español', 'English'];
+const LANGUAGES = [
+	{ label: 'Español', href: '/' },
+	{ label: 'English', href: '/en' },
+];
 ---
 
-<div class="relative mx-1">
+<div
+	transition:persist
+	class="relative mx-1"
+>
 	<button
-		transition:persist
 		id="lang-toggle-btn"
 		class="flex appearance-none border-none transition hover:scale-110"
 	>
 		<span class="sr-only">Elige el idioma</span>
 		<div class="flex items-center gap-2">
 			<Language class="size-6" />
-			<span class="text-sm">Español</span>
+			<span class="text-sm">Idioma</span>
 		</div>
 	</button>
+
 	<div
-		transition:persist
 		id="langs-menu"
 		class="absolute top-8 right-0 hidden min-w-[8rem] rounded-md border border-gray-100 bg-white/90 p-1 text-sm shadow-[0_3px_10px_rgb(0,0,0,0.2)] backdrop-blur-md dark:border-gray-500/20 dark:bg-gray-900/90"
 	>
 		<ul>
 			{
-				LANGUAGES.map((language) => (
-					<li class="langs-menu-option cursor-default rounded-sm px-2 py-1.5 hover:bg-neutral-400/40 dark:hover:bg-gray-500/50">
-						{language}
+				LANGUAGES.map(({ label, href }) => (
+					<li class="langs-menu-option rounded-sm hover:bg-neutral-400/40 dark:hover:bg-gray-500/50">
+						<a
+							href={href}
+							class="block w-full px-2 py-1.5"
+						>
+							{label}
+						</a>
 					</li>
 				))
 			}
@@ -53,27 +62,8 @@ const LANGUAGES = ['Español', 'English'];
 </style>
 
 <script is:inline>
-	// Referencia al menú de idiomas
 	const langsMenu = document.getElementById('langs-menu');
 
-	// Función para actualizar la visualización del idioma seleccionado
-	const updateLanguage = () => {
-		// Recupera el idioma guardado o usa "español" por defecto
-		const language = localStorage.getItem('language') || 'español';
-		// Actualiza el texto del botón para reflejar el idioma actual
-		document.querySelector('#lang-toggle-btn span.text-sm').innerText =
-			language.charAt(0).toUpperCase() + language.slice(1);
-	};
-
-	// Inicializa el idioma en carga de página
-	updateLanguage();
-
-	// Cierra el menú al hacer clic fuera
-	document.addEventListener('click', () => {
-		langsMenu.classList.remove('open');
-	});
-
-	// Muestra u oculta el menú cuando se hace clic en el botón
 	document
 		.getElementById('lang-toggle-btn')
 		.addEventListener('click', (e) => {
@@ -81,13 +71,7 @@ const LANGUAGES = ['Español', 'English'];
 			langsMenu.classList.toggle('open');
 		});
 
-	// Al seleccionar un idioma, se guarda en localStorage y se actualiza la UI
-	document.querySelectorAll('.langs-menu-option').forEach((element) => {
-		element.addEventListener('click', (e) => {
-			const selectedLanguage = e.target.innerText.toLowerCase().trim();
-			localStorage.setItem('language', selectedLanguage);
-			updateLanguage();
-			langsMenu.classList.remove('open'); // Opcional: cerrar el menú
-		});
+	document.addEventListener('click', () => {
+		langsMenu.classList.remove('open');
 	});
 </script>

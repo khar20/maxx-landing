@@ -4,20 +4,34 @@ import Header from '@components/Header.astro';
 import Hero from '@components/Hero.astro';
 import SectionContainer from '@components/SectionContainer.astro';
 import Services from '@components/Services.astro';
-import TitleSection from '@components/TitleSection.astro';
 import Footer from '@components/Footer.astro';
+import About from '@components/About.astro';
 ---
 
 <Layout>
 	<Header />
-	<main class="mx-auto space-y-20">
-		<SectionContainer id="hero" class="flex min-h-screen items-center justify-center p-10">
+	<main
+		transition:animate="slide"
+		class="flex-1 text-gray-900 dark:border-white dark:bg-[#050814] dark:text-gray-200"
+	>
+		<SectionContainer
+			id="hero"
+			class="flex min-h-screen w-full items-center justify-center from-[#0e173a] to-[#050814] px-4 py-12 md:py-24 lg:py-32 xl:py-48 dark:bg-linear-to-b"
+		>
 			<Hero />
 		</SectionContainer>
-		<SectionContainer class="p-10" id="services">
-			<TitleSection> Servicios </TitleSection>
+		<SectionContainer
+			id="services"
+			class="p-4"
+		>
 			<Services />
 		</SectionContainer>
-		<Footer />
+		<SectionContainer
+			id="about"
+			class="p-4"
+		>
+			<About />
+		</SectionContainer>
 	</main>
+	<Footer />
 </Layout>
