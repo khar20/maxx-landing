@@ -14,68 +14,7 @@ import type { ColorOption } from '@components/PricingCard.astro';
 import PricingSegmentSelector from '@components/PricingSegmentSelector.astro';
 import Contact from '@components/Contact.astro';
 
-const initialSegment =
-	Astro.url.searchParams.get('segment') === 'empresarial'
-		? 'empresarial'
-		: 'personal';
-
-const personalPlans = [
-	{
-		name: 'Plan Básico',
-		price: 29,
-		color: 'blue',
-		features: [
-			'1 landing page',
-			'Dominio personalizado',
-			'Formulario de contacto',
-			'Diseño adaptable (responsivo)',
-			'Soporte por correo electronico',
-		],
-	},
-	{
-		name: 'Plan Premium',
-		price: 79,
-		color: 'purple',
-		features: [
-			'3 landing pages',
-			'Dominio personalizado',
-			'Formulario de contacto',
-			'Diseño adaptable (responsivo)',
-			'Análisis de Visitantes',
-			'Soporte prioritario',
-		],
-	},
-];
-
-const empresarialPlans = [
-	{
-		name: 'Plan Básico Empresarial',
-		price: 99,
-		color: 'blue',
-		features: [
-			'3 landing pages',
-			'Dominio personalizado',
-			'Formulario de contacto',
-			'Diseño adaptable (responsivo)',
-			'Soporte telefónico',
-			'Logo e imagen corporativa',
-		],
-	},
-	{
-		name: 'Plan Premium Empresarial',
-		price: 199,
-		color: 'purple',
-		features: [
-			'5 landing pages',
-			'Dominio personalizado',
-			'Formulario de contacto',
-			'Análisis de visitantes',
-			'Soporte prioritario',
-			'Integraciones API personalizadas',
-			'Reuniones mensuales de seguimiento',
-		],
-	},
-];
+const services = [];
 ---
 
 <Layout>
@@ -85,80 +24,10 @@ const empresarialPlans = [
 		class="flex-1 text-gray-900 dark:border-white dark:bg-[#050814] dark:text-gray-200"
 	>
 		<SectionContainer
-			id="pricing"
+			id="services"
 			class="flex min-h-screen w-full items-center justify-center from-[#0e173a] to-[#050814] px-4 dark:bg-linear-to-b"
 		>
-			<div class="container mx-auto px-4">
-				<PricingHeader />
-
-				<div class="col-1 container justify-center">
-					<!-- selector -->
-					<PricingSegmentSelector
-						id="pricing-segment-selector"
-						activeSegment={initialSegment}
-					/>
-
-					<!-- personal -->
-					<div
-						id="personal-plans"
-						class={`grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-10 ${initialSegment === 'personal' ? 'block' : 'hidden'}`}
-					>
-						{
-							personalPlans.map((plan, index) => (
-								<PricingCard
-									name={plan.name}
-									price={plan.price}
-									color={plan.color as ColorOption}
-									features={plan.features}
-									isPopular={index === 1}
-									order={`segment-personal order-${index}`}
-								/>
-							))
-						}
-					</div>
-
-					<!-- business -->
-					<div
-						id="business-plans"
-						class={`grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-10 ${initialSegment === 'empresarial' ? 'block' : 'hidden'}`}
-					>
-						{
-							empresarialPlans.map((plan, index) => (
-								<PricingCard
-									name={plan.name}
-									price={plan.price}
-									color={plan.color as ColorOption}
-									features={plan.features}
-									isPopular={index === 1}
-									order={`segment-empresarial order-${index}`}
-								/>
-							))
-						}
-					</div>
-				</div>
-
-				<div
-					id="business-advantages-container"
-					class="mt-16"
-				>
-					<BusinessAdvantages
-						isVisible={initialSegment === 'empresarial'}
-					/>
-				</div>
-
-				<div
-					id="custom-plan-section"
-					class="mt-16"
-				>
-					<CustomPlan
-						segment={initialSegment as 'personal' | 'empresarial'}
-					/>
-				</div>
-
-				<div class="mt-16 mb-10">
-					<FAQ />
-				</div>
-			</div>
+			<h1 class="text-center text-4xl font-bold">Nuestros Servicios</h1>
 		</SectionContainer>
 		<SectionContainer
 			id="contact"

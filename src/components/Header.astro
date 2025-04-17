@@ -1,13 +1,12 @@
 ---
-import Logo from './Logo.astro';
+import Logo from './icons/Logo.astro';
 import ThemeSelector from './ThemeSelector.astro';
 import LangSelector from './LangSelector.astro';
 
 const navItems = [
-	{ title: 'Servicios', label: 'servicios', url: '/#services' },
+	{ title: 'Servicios', label: 'servicios', url: '/services' },
 	{ title: 'Precios', label: 'precios', url: '/pricing' },
-	{ title: 'Contacto', label: 'contacto', url: '/#contact' },
-	{ title: 'Sobre nosotros', label: 'sobre-nosotros', url: '/#about' },
+	{ title: 'Contacto', label: 'contacto', url: '/contact' },
 ];
 ---
 
@@ -23,7 +22,7 @@ const navItems = [
 			class="flex h-10 items-center gap-2 text-black transition-all ease-in-out hover:scale-110 dark:text-white"
 			href="/"
 		>
-			<Logo />
+			<Logo class="h-10 text-black dark:text-white" />
 		</a>
 		<nav class="hidden gap-6 md:flex">
 			{
