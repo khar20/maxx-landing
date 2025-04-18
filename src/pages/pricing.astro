@@ -181,94 +181,103 @@ const empresarialPlans = [
 		);
 
 		function switchSegment(segment: 'personal' | 'empresarial'): void {
-			if (
-				!personalTab ||
-				!empresarialTab ||
-				!personalCards ||
-				!empresarialCards
-			) {
-				console.error(
-					'No se encontraron algunos elementos necesarios en el DOM'
-				);
-				return;
-			}
+    if (!personalTab || !empresarialTab || !personalCards || !empresarialCards) {
+        console.error('No se encontraron algunos elementos necesarios en el DOM');
+        return;
+    }
 
-			if (segment === 'personal') {
-				personalTab.classList.add(
-					'bg-white',
-					'dark:bg-gray-700',
-					'shadow-sm'
-				);
-				personalTab.classList.remove(
-					'text-gray-500',
-					'hover:text-gray-700',
-					'dark:hover:text-gray-300'
-				);
+    if (segment === 'personal') {
+        // Aplicar clases activas al botón Personal
+        personalTab.classList.add(
+            'bg-white', 
+            'dark:bg-gray-800', 
+            'shadow', 
+            'text-blue-600', 
+            'dark:text-blue-400'
+        );
+        personalTab.classList.remove(
+            'text-gray-700', 
+            'dark:text-gray-300', 
+            'hover:bg-gray-200', 
+            'dark:hover:bg-gray-600'
+        );
 
-				empresarialTab.classList.remove(
-					'bg-white',
-					'dark:bg-gray-700',
-					'shadow-sm'
-				);
-				empresarialTab.classList.add(
-					'text-gray-500',
-					'hover:text-gray-700',
-					'dark:hover:text-gray-300'
-				);
+        // Quitar clases activas del botón Empresarial
+        empresarialTab.classList.remove(
+            'bg-white', 
+            'dark:bg-gray-800', 
+            'shadow', 
+            'text-blue-600', 
+            'dark:text-blue-400'
+        );
+        empresarialTab.classList.add(
+            'text-gray-700', 
+            'dark:text-gray-300', 
+            'hover:bg-gray-200', 
+            'dark:hover:bg-gray-600'
+        );
 
-				personalCards.classList.remove('hidden');
-				personalCards.classList.add('block');
-				empresarialCards.classList.remove('block');
-				empresarialCards.classList.add('hidden');
+        // Mostrar/ocultar los planes correspondientes
+        personalCards.classList.remove('hidden');
+        personalCards.classList.add('block');
+        empresarialCards.classList.remove('block');
+        empresarialCards.classList.add('hidden');
 
-				const businessAdvantagesInner = document.querySelector(
-					'#business-advantages'
-				);
-				if (businessAdvantagesInner) {
-					businessAdvantagesInner.classList.remove('block');
-					businessAdvantagesInner.classList.add('hidden');
-				}
+        // Ocultar ventajas empresariales
+        const businessAdvantagesInner = document.querySelector('#business-advantages');
+        if (businessAdvantagesInner) {
+            businessAdvantagesInner.classList.remove('block');
+            businessAdvantagesInner.classList.add('hidden');
+        }
 
-				updateCustomPlan('personal');
-			} else {
-				empresarialTab.classList.add(
-					'bg-white',
-					'dark:bg-gray-700',
-					'shadow-sm'
-				);
-				empresarialTab.classList.remove(
-					'text-gray-500',
-					'hover:text-gray-700',
-					'dark:hover:text-gray-300'
-				);
+        updateCustomPlan('personal');
+    } else {
+        // Aplicar clases activas al botón Empresarial
+        empresarialTab.classList.add(
+            'bg-white', 
+            'dark:bg-gray-800', 
+            'shadow', 
+            'text-blue-600', 
+            'dark:text-blue-400'
+        );
+        empresarialTab.classList.remove(
+            'text-gray-700', 
+            'dark:text-gray-300', 
+            'hover:bg-gray-200', 
+            'dark:hover:bg-gray-600'
+        );
 
-				personalTab.classList.remove(
-					'bg-white',
-					'dark:bg-gray-700',
-					'shadow-sm'
-				);
-				personalTab.classList.add(
-					'text-gray-500',
-					'hover:text-gray-700',
-					'dark:hover:text-gray-300'
-				);
+        // Quitar clases activas del botón Personal
+        personalTab.classList.remove(
+            'bg-white', 
+            'dark:bg-gray-800', 
+            'shadow', 
+            'text-blue-600', 
+            'dark:text-blue-400'
+        );
+        personalTab.classList.add(
+            'text-gray-700', 
+            'dark:text-gray-300', 
+            'hover:bg-gray-200', 
+            'dark:hover:bg-gray-600'
+        );
 
-				empresarialCards.classList.remove('hidden');
-				empresarialCards.classList.add('block');
-				personalCards.classList.remove('block');
-				personalCards.classList.add('hidden');
+        // Mostrar/ocultar los planes correspondientes
+        empresarialCards.classList.remove('hidden');
+        empresarialCards.classList.add('block');
+        personalCards.classList.remove('block');
+        personalCards.classList.add('hidden');
 
-				const businessAdvantagesInner = document.querySelector(
-					'#business-advantages'
-				);
-				if (businessAdvantagesInner) {
-					businessAdvantagesInner.classList.remove('hidden');
-					businessAdvantagesInner.classList.add('block');
-				}
+        // Mostrar ventajas empresariales
+        const businessAdvantagesInner = document.querySelector('#business-advantages');
+        if (businessAdvantagesInner) {
+            businessAdvantagesInner.classList.remove('hidden');
+            businessAdvantagesInner.classList.add('block');
+        }
 
-				updateCustomPlan('empresarial');
-			}
-		}
+        updateCustomPlan('empresarial');
+    }
+}
 
 		function updateCustomPlan(segment: 'personal' | 'empresarial'): void {
 			const customPlanElement = document.querySelector(
