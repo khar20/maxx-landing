@@ -1,0 +1,68 @@
+---
+
+---
+
+<form class="space-y-6">
+	<div class="grid gap-6 sm:grid-cols-2">
+		<div class="space-y-2">
+			<label
+				for="name"
+				class="text-sm font-medium"
+			>
+				Nombre
+			</label>
+			<input
+				id="name"
+				class="focus:ring-opacity-20 dark:focus:ring-opacity-20 w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900 focus:border-purple-500 focus:ring-2 focus:ring-purple-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-purple-500 dark:focus:ring-purple-500"
+				placeholder="Ingresa tu nombre"
+			/>
+		</div>
+		<div class="space-y-2">
+			<label
+				for="email"
+				class="text-sm font-medium"
+			>
+				Email
+			</label>
+			<input
+				id="email"
+				class="focus:ring-opacity-20 dark:focus:ring-opacity-20 w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900 focus:border-purple-500 focus:ring-2 focus:ring-purple-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-purple-500 dark:focus:ring-purple-500"
+				placeholder="Ingresa tu email"
+				type="email"
+			/>
+		</div>
+	</div>
+	<div class="space-y-2">
+		<label
+			for="subject"
+			class="text-sm font-medium"
+		>
+			Asunto/Proyecto
+		</label>
+		<input
+			id="subject"
+			class="focus:ring-opacity-20 dark:focus:ring-opacity-20 w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900 focus:border-purple-500 focus:ring-2 focus:ring-purple-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-purple-500 dark:focus:ring-purple-500"
+			placeholder="Ingresa el asunto o nombre de tu proyecto"
+		/>
+	</div>
+	<div class="space-y-2">
+		<label
+			for="message"
+			class="text-sm font-medium"
+		>
+			Mensaje
+		</label>
+		<textarea
+			id="message"
+			rows="4"
+			class="focus:ring-opacity-20 dark:focus:ring-opacity-20 w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900 focus:border-purple-500 focus:ring-2 focus:ring-purple-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-purple-500 dark:focus:ring-purple-500"
+			placeholder="Ingresa tu mensaje"
+		></textarea>
+	</div>
+	<button
+		type="submit"
+		class="w-full rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 px-5 py-3 text-center text-sm font-medium text-white hover:bg-gradient-to-r hover:from-purple-700 hover:to-pink-700 focus:ring-4 focus:ring-purple-300 focus:outline-none dark:focus:ring-purple-800"
+	>
+		Enviar Mensaje
+	</button>
+</form>

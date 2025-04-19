@@ -5,15 +5,55 @@ const { title, description, image } = Astro.props;
 ---
 
 <div
-	class="border border-black p-5 transition-all duration-100 ease-in-out hover:bg-gray-100 dark:border-white dark:hover:bg-gray-800"
+	class="group relative overflow-hidden rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-all hover:translate-y-[-4px] hover:shadow-md dark:border-gray-800 dark:bg-gray-950"
 >
-	<h1 class="text-2xl font-bold">{title}</h1>
-	<p>{description}</p>
-	<Image
-		src={image}
-		alt={title}
-		height="100"
-		width="100"
-		class="rounded-md object-cover"
-	/>
+	<div class="mb-4 flex items-center space-x-4">
+		<div
+			class="flex-shrink-0 rounded-full bg-gray-100 p-2 text-gray-700 dark:bg-gray-800 dark:text-gray-300"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="24"
+				height="24"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				class="lucide lucide-globe h-10 w-10"
+				><circle
+					cx="12"
+					cy="12"
+					r="10"
+				></circle><path
+					d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"
+				>
+				</path>
+				<path d="M2 12h20"> </path>
+			</svg>
+		</div>
+		<h3 class="text-xl font-bold">{title}</h3>
+	</div>
+	<p class="mb-6 text-gray-600 dark:text-gray-400">
+		{description}
+	</p>
+	<div class="mt-auto flex justify-end">
+		<div class="relative h-16 w-16 overflow-hidden rounded-lg">
+			<Image
+				alt="Desarrollo de Soluciones Web"
+				loading="lazy"
+				width="100"
+				height="100"
+				decoding="async"
+				data-nimg="1"
+				class="object-cover transition-transform group-hover:scale-110"
+				src={image}
+			/>
+		</div>
+	</div>
+	<div
+		class="absolute bottom-0 left-0 h-1 w-0 bg-gray-900 transition-all duration-300 group-hover:w-full dark:bg-white"
+	>
+	</div>
 </div>

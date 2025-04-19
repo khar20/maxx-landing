@@ -25,7 +25,37 @@ import { ClientRouter } from 'astro:transitions';
 		<title>MAXX Solutions</title>
 		<ClientRouter />
 	</head>
-	<body class="m-0 flex h-full min-h-screen w-full flex-col">
+	<body class="m-0 flex h-full min-h-screen w-full flex-col dark:bg-black">
 		<slot />
 	</body>
 </html>
+
+<script is:inline>
+	document.addEventListener('astro:page-load', () => {
+		document.body.addEventListener('click', (event) => {
+			const anchor = event.target.closest('a');
+			if (!anchor) return;
+
+			const currentUrl = new URL(window.location.href);
+			const targetUrl = new URL(anchor.href, currentUrl);
+
+			if (targetUrl.origin !== currentUrl.origin) return;
+
+			if (
+				currentUrl.pathname === targetUrl.pathname &&
+				currentUrl.search === targetUrl.search &&
+				currentUrl.hash !== targetUrl.hash
+			) {
+				return;
+			}
+
+			if (
+				currentUrl.pathname === targetUrl.pathname &&
+				currentUrl.search === targetUrl.search &&
+				currentUrl.hash === targetUrl.hash
+			) {
+				event.preventDefault();
+			}
+		});
+	});
+</script>

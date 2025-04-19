@@ -1,122 +1,64 @@
 ---
-import Phone from './icons/Phone.astro';
+import ContactForm from './ContactForm.astro';
+import MailIcon from './icons/Mail.astro';
+import PhoneIcon from './icons/Phone.astro';
+import TitleSection from './TitleSection.astro';
 ---
 
 <div class="container px-4 md:px-6">
-	<div class="grid gap-6 lg:grid-cols-2 lg:gap-12">
-		<div class="flex flex-col justify-center space-y-4">
-			<div class="space-y-2">
-				<div
-					class="focus:ring-ring bg-primary text-primary-foreground hover:bg-primary/80 mb-2 inline-flex items-center rounded-full border border-transparent px-2.5 py-0.5 text-xs font-semibold transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none"
-					data-v0-t="badge"
-				>
-					Contáctanos
-				</div><h2
-					class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl"
+	<div class="grid gap-12 lg:grid-cols-2">
+		<div class="flex flex-col justify-center space-y-8">
+			<div class="space-y-4">
+				<h2
+					class="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-3xl font-bold tracking-tighter text-transparent sm:text-4xl"
 				>
 					Háblanos de tu proyecto
-				</h2><p class="text-muted-foreground max-w-[600px] md:text-xl">
+				</h2>
+				<p
+					class="max-w-[600px] text-lg text-gray-700 dark:text-gray-300"
+				>
 					¿Listo para comenzar tu próximo proyecto de software? Ponte
 					en contacto con nuestro equipo para hablar sobre tus
 					necesidades.
 				</p>
 			</div>
-			<div class="space-y-4">
-				<div class="flex items-center gap-2">
-					<Phone class="text-black dark:text-white h-5 w-5" />
-					<span>+51 938 960 683</span>
-				</div>
-				<div class="flex items-center gap-2">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="24"
-						height="24"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						class="lucide lucide-message-square text-primary h-5 w-5"
-						><path
-							d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
-						></path>
-					</svg>
-					<span>info@maxxsoftw.com</span>
-				</div>
-				<div class="flex items-center gap-2">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="24"
-						height="24"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						class="lucide lucide-globe text-primary h-5 w-5"
-						><circle
-							cx="12"
-							cy="12"
-							r="10"
-						></circle><path
-							d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"
-						>
-						</path><path d="M2 12h20"></path></svg
+			<div class="space-y-6">
+				<div class="flex items-center gap-4">
+					<div
+						class="inline-flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900/20"
 					>
-					<span>Trujillo, Perú</span>
+						<PhoneIcon
+							class="h-5 w-5 text-purple-600 dark:text-purple-400"
+						/>
+					</div>
+					<div>
+						<p class="text-sm text-gray-500 dark:text-gray-400">
+							Teléfono
+						</p>
+						<p class="font-medium">+51 938 960 683</p>
+					</div>
+				</div>
+				<div class="flex items-center gap-4">
+					<div
+						class="inline-flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900/20"
+					>
+						<MailIcon
+							class="h-5 w-5 text-purple-600 dark:text-purple-400"
+						/>
+					</div>
+					<div>
+						<p class="text-sm text-gray-500 dark:text-gray-400">
+							Email
+						</p>
+						<p class="font-medium">info@maxxsoftw.com</p>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="bg-background flex flex-col gap-4 rounded-lg border p-6">
-			<div class="grid gap-4 sm:grid-cols-2">
-				<div class="grid gap-2">
-					<label
-						for="name"
-						class="text-sm leading-none font-medium"
-						>Nombre</label
-					><input
-						id="name"
-						class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
-						placeholder="Ingresa tu nombre"
-					/>
-				</div><div class="grid gap-2">
-					<label
-						for="email"
-						class="text-sm leading-none font-medium"
-						>Email</label
-					><input
-						id="email"
-						class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
-						placeholder="Ingresa tu email"
-						type="email"
-					/>
-				</div>
-			</div><div class="grid gap-2">
-				<label
-					for="subject"
-					class="text-sm leading-none font-medium"
-					>Asunto/Proyecto</label
-				><input
-					id="subject"
-					class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
-					placeholder="Ingresa el asunto o nombre de tu proyecto"
-				/>
-			</div><div class="grid gap-2">
-				<label
-					for="message"
-					class="text-sm leading-none font-medium"
-					>Mensaje</label
-				><textarea
-					id="message"
-					class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex min-h-[120px] w-full rounded-md border px-3 py-2 text-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
-					placeholder="Ingresa tu mensaje"
-				></textarea>
-			</div><button
-				class="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-10 w-full items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
-				>Enviar Mensaje</button
-			>
+		<div
+			class="rounded-xl border border-gray-100 bg-white p-8 shadow-xl dark:border-gray-800 dark:bg-gray-900"
+		>
+			<ContactForm />
 		</div>
 	</div>
 </div>

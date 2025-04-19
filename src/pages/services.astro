@@ -13,109 +13,140 @@ import CustomPlan from '@components/CustomPlan.astro';
 import type { ColorOption } from '@components/PricingCard.astro';
 import PricingSegmentSelector from '@components/PricingSegmentSelector.astro';
 import Contact from '@components/Contact.astro';
+import { Image } from 'astro:assets';
 
 const services = [
-  {
-    id: "software-custom",
-    title: "Desarrollo de Software Custom",
-    description: "Soluciones de software a medida adaptadas a tus necesidades específicas. Creamos aplicaciones personalizadas que resuelven problemas concretos y optimizan los procesos de tu negocio.",
-    features: [
-      "Análisis detallado de requisitos y necesidades",
-      "Desarrollo ágil con entregas periódicas",
-      "Código limpio y mantenible",
-      "Soporte técnico post-lanzamiento",
-      "Escalabilidad para crecimiento futuro"
-    ],
-    icon: "code"
-  },
-  {
-    id: "landing-pages",
-    title: "Desarrollo de Landing Pages",
-    description: "Páginas de aterrizaje optimizadas para convertir visitantes en clientes. Diseñadas para maximizar tu tasa de conversión con un diseño atractivo y enfocado en resultados.",
-    features: [
-      "Diseño responsive adaptado a todos los dispositivos",
-      "Optimización SEO para mejor visibilidad",
-      "Tiempos de carga rápidos para reducir abandonos",
-      "Integración con herramientas de análisis",
-      "Diseño centrado en conversión"
-    ],
-    icon: "layout"
-  }
+	{
+		id: 'software-custom',
+		title: 'Desarrollo de Software Custom',
+		description:
+			'Soluciones de software a medida adaptadas a tus necesidades específicas. Creamos aplicaciones personalizadas que resuelven problemas concretos y optimizan los procesos de tu negocio.',
+		features: [
+			'Análisis detallado de requisitos y necesidades',
+			'Desarrollo ágil con entregas periódicas',
+			'Código limpio y mantenible',
+			'Soporte técnico post-lanzamiento',
+			'Escalabilidad para crecimiento futuro',
+		],
+		icon: 'code',
+		transitionName: 'img1',
+	},
+	{
+		id: 'landing-pages',
+		title: 'Desarrollo de Landing Pages',
+		description:
+			'Páginas de aterrizaje optimizadas para convertir visitantes en clientes. Diseñadas para maximizar tu tasa de conversión con un diseño atractivo y enfocado en resultados.',
+		features: [
+			'Diseño responsive adaptado a todos los dispositivos',
+			'Optimización SEO para mejor visibilidad',
+			'Tiempos de carga rápidos para reducir abandonos',
+			'Integración con herramientas de análisis',
+			'Diseño centrado en conversión',
+		],
+		icon: 'layout',
+		transitionName: 'img2',
+	},
 ];
 ---
 
 <Layout>
-  <Header />
-  <main
-    transition:animate="slide"
-    class="flex-1 text-gray-900 dark:border-white dark:bg-[#050814] dark:text-gray-200"
-  >
-    <SectionContainer
-      id="services"
-      class="flex min-h-screen w-full flex-col items-center justify-center from-[#0e173a] to-[#050814] px-4 py-16 dark:bg-linear-to-b"
-    >
-      <h1 class="text-center text-5xl font-bold mb-20">Nuestros Servicios</h1>
-      
-      <div class="w-full max-w-6xl">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {services.map(service => (
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full">
-              <div class="p-6 flex flex-col h-full">
-                <div class="flex items-center mb-6">
-                  <div class="bg-blue-100 dark:bg-blue-900 p-3 rounded-full mr-4">
-                    <i class={`icon icon-${service.icon} text-blue-600 dark:text-blue-400`}></i>
-                  </div>
-                  <h3 class="text-xl font-semibold text-gray-900 dark:text-white">{service.title}</h3>
-                </div>
-                <p class="text-gray-600 dark:text-gray-300 mb-6">{service.description}</p>
-                <div class="flex-grow">
-                  <h4 class="font-medium text-gray-900 dark:text-white mb-3">Características</h4>
-                  <ul class="space-y-2">
-                    {service.features.map(feature => (
-                      <li class="flex items-center">
-                        <span class="text-green-500 mr-2">✓</span>
-                        <span class="text-gray-600 dark:text-gray-300">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div class="mt-8">
-                  <a 
-                    href={`/servicios/${service.id}`} 
-                    class="inline-block w-full text-center px-5 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-medium transition-colors duration-200"
-                  >
-                    Más información
-                  </a>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </SectionContainer>
-    
-    <SectionContainer
-      id="contact"
-      class="flex items-center justify-center p-4"
-    >
-      <Contact />
-    </SectionContainer>
-  </main>
-  <Footer />
+	<Header />
+	<main
+		transition:animate="slide"
+		class="flex-1 text-gray-900 dark:border-white dark:bg-[#050814] dark:text-gray-200"
+	>
+		<SectionContainer
+			id="services"
+			class="flex min-h-screen w-full flex-col items-center justify-center from-[#0e173a] to-[#050814] px-4 py-16 dark:bg-linear-to-b"
+		>
+			<h1 class="mb-20 text-center text-5xl font-bold">
+				Nuestros Servicios
+			</h1>
+
+			<div class="w-full max-w-6xl">
+				<div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+					{
+						services.map((service) => (
+							<div class="flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-md transition-shadow duration-300 hover:shadow-lg dark:bg-gray-800">
+								<div class="flex h-full flex-col p-6">
+									<div class="mb-6 flex items-center">
+										<div class="mr-4 rounded-full bg-blue-100 p-3 dark:bg-blue-900">
+											<i
+												class={`icon icon-${service.icon} text-blue-600 dark:text-blue-400`}
+											/>
+										</div>
+										<h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+											{service.title}
+										</h3>
+									</div>
+									<p class="mb-6 text-gray-600 dark:text-gray-300">
+										{service.description}
+									</p>
+									<div class="flex-grow">
+										<h4 class="mb-3 font-medium text-gray-900 dark:text-white">
+											Características
+										</h4>
+										<ul class="space-y-2">
+											{service.features.map((feature) => (
+												<li class="flex items-center">
+													<span class="mr-2 text-green-500">
+														✓
+													</span>
+													<span class="text-gray-600 dark:text-gray-300">
+														{feature}
+													</span>
+												</li>
+											))}
+										</ul>
+									</div>
+									<div class="container mt-6 flex items-center justify-between">
+										<Image
+											src="https://placehold.co/100"
+											alt={service.title}
+											class="h-40 w-40 mx-auto"
+											width={64}
+											height={64}
+											loading="lazy"
+										/>
+									</div>
+									<div class="mt-8">
+										<a
+											href={`/servicios/${service.id}`}
+											class="inline-block w-full rounded-lg bg-blue-600 px-5 py-3 text-center font-medium text-white transition-colors duration-200 hover:bg-blue-700"
+										>
+											Más información
+										</a>
+									</div>
+								</div>
+							</div>
+						))
+					}
+				</div>
+			</div>
+		</SectionContainer>
+
+		<SectionContainer
+			id="contact"
+			class="flex items-center justify-center p-4"
+		>
+			<Contact />
+		</SectionContainer>
+	</main>
+	<Footer />
 </Layout>
 
 <style>
-  	@keyframes pulse {
-  	  0%,
-  	  100% {
-  	    transform: scale(1);
-  	  }
-  	  50% {
-  	    transform: scale(1.02);
-  	  }
-  	}
+	@keyframes pulse {
+		0%,
+		100% {
+			transform: scale(1);
+		}
+		50% {
+			transform: scale(1.02);
+		}
+	}
 
-  	.popular-service {
-    	animation: pulse 2s infinite;
-  	}
+	.popular-service {
+		animation: pulse 2s infinite;
+	}
 </style>

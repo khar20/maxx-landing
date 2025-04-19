@@ -1,43 +1,28 @@
----
-
----
-
-<div class="my-2">
+<div class="my-5 w-full">
 	<h2
 		id="animated-heading"
 		class="relative pb-2 text-left text-3xl font-extrabold md:text-4xl dark:text-white"
 	>
 		<slot />
 		<span
-			class="absolute bottom-0 left-0 block h-1 w-0 bg-black transition-all duration-1000 ease-in-out dark:bg-white"
+			class="absolute bottom-0 left-0 block h-1 w-0 bg-black dark:bg-white"
 		></span>
 	</h2>
 </div>
 
-<script is:inline>
-	document.addEventListener('DOMContentLoaded', () => {
-		const heading = document.getElementById('animated-heading');
-		const underline = heading.querySelector('span');
+<style>
+	@keyframes underlineGrow {
+		from {
+			width: 0;
+		}
+		to {
+			width: 100%;
+		}
+	}
 
-		const observerOptions = {
-			root: null,
-			threshold: 0.6,
-		};
-
-		const observerCallback = (entries, observer) => {
-			entries.forEach((entry) => {
-				if (entry.isIntersecting) {
-					underline.style.width = '100%';
-				} else {
-					underline.style.width = '0';
-				}
-			});
-		};
-
-		const observer = new IntersectionObserver(
-			observerCallback,
-			observerOptions
-		);
-		observer.observe(heading);
-	});
-</script>
+	#animated-heading span {
+		animation: underlineGrow 2s ease-in-out forwards;
+		animation-timeline: view();
+		animation-range: entry 0 cover 30%;
+	}
+</style>

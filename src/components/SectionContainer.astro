@@ -5,7 +5,26 @@ const { class: className, id } = Astro.props;
 <section
 	id={id}
 	data-section={id}
-	class={`${className} scroll-m-20 w-full `}
+	class={`${className} scroll-m-20 w-full`}
 >
 	<slot />
 </section>
+
+<style>
+	@keyframes appear {
+		from {
+			opacity: 0;
+			transform: translateX(-100px);
+		}
+		to {
+			opacity: 1;
+			transform: translateX(0px);
+		}
+	}
+
+	section {
+		animation: appear 1s linear;
+		animation-timeline: view();
+		animation-range: entry 0 cover 10%;
+	}
+</style>
