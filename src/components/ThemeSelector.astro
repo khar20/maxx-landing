@@ -64,63 +64,81 @@ const THEMES = ['Light', 'Dark', 'System'];
 </style>
 
 <script is:inline>
-	const themesMenu = document.getElementById('themes-menu');
-	const toggleBtn = document.getElementById('theme-toggle-btn');
-	const themeIcons = document.querySelectorAll('.theme-toggle-icon');
-	const themeOptions = document.querySelectorAll('.themes-menu-option');
-	const matchMedia = window.matchMedia('(prefers-color-scheme: dark)');
+    function initThemeSelector() {
+        const themesMenu = document.getElementById('themes-menu');
+        const toggleBtn = document.getElementById('theme-toggle-btn');
+        const themeIcons = document.querySelectorAll('.theme-toggle-icon');
+        const themeOptions = document.querySelectorAll('.themes-menu-option');
+        const matchMedia = window.matchMedia('(prefers-color-scheme: dark)');
 
-	let removeListener = null;
+        let removeListener = null;
 
-	const getThemePreference = () => {
-		return localStorage.getItem('theme') ?? 'system';
-	};
+        const getThemePreference = () => {
+            return localStorage.getItem('theme') ?? 'system';
+        };
 
-	const updateIcon = (theme) => {
-		themeIcons.forEach((icon) => {
-			icon.style.scale = icon.id === theme ? '1' : '0';
-		});
-	};
+        const updateIcon = (theme) => {
+            themeIcons.forEach((icon) => {
+                icon.style.scale = icon.id === theme ? '1' : '0';
+            });
+        };
 
-	const applyTheme = () => {
-		const theme = getThemePreference();
-		const isDark =
-			theme === 'dark' || (theme === 'system' && matchMedia.matches);
-		document.documentElement.classList.toggle('dark', isDark);
-		updateIcon(theme);
-	};
+        const applyTheme = () => {
+            const theme = getThemePreference();
+            const isDark =
+                theme === 'dark' || (theme === 'system' && matchMedia.matches);
+            document.documentElement.classList.toggle('dark', isDark);
+            updateIcon(theme);
+        };
 
-	const updateTheme = () => {
-		if (removeListener) removeListener();
-		matchMedia.addEventListener('change', applyTheme);
-		removeListener = () =>
-			matchMedia.removeEventListener('change', applyTheme);
-		applyTheme();
-	};
+        const updateTheme = () => {
+            if (removeListener) removeListener();
+            matchMedia.addEventListener('change', applyTheme);
+            removeListener = () =>
+                matchMedia.removeEventListener('change', applyTheme);
+            applyTheme();
+        };
 
-	updateTheme();
+        updateTheme();
 
-	toggleBtn.addEventListener('click', (e) => {
-		e.stopPropagation();
-		themesMenu.classList.toggle('open');
-	});
+        // Remover listeners antiguos clonando y reemplazando el elemento
+        if (toggleBtn) {
+            const newToggleBtn = toggleBtn.cloneNode(true);
+            toggleBtn.parentNode.replaceChild(newToggleBtn, toggleBtn);
+            
+            newToggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                themesMenu.classList.toggle('open');
+            });
+        }
 
-	document.addEventListener('click', () => {
-		themesMenu.classList.remove('open');
-	});
+        // Reinicializar opciones de tema
+        themeOptions.forEach((option) => {
+            const newOption = option.cloneNode(true);
+            option.parentNode.replaceChild(newOption, option);
+            
+            newOption.addEventListener('click', () => {
+                localStorage.setItem(
+                    'theme',
+                    newOption.textContent.trim().toLowerCase()
+                );
+                updateTheme();
+                themesMenu.classList.remove('open');
+            });
+        });
 
-	themeOptions.forEach((option) => {
-		option.addEventListener('click', () => {
-			localStorage.setItem(
-				'theme',
-				option.textContent.trim().toLowerCase()
-			);
-			updateTheme();
-		});
-	});
+        // Cerrar el menú al hacer clic fuera
+        document.addEventListener('click', () => {
+            themesMenu?.classList.remove('open');
+        });
+    }
 
-	document.addEventListener('astro:after-swap', () => {
-		updateTheme();
-		window.scrollTo({ left: 0, top: 0, behavior: 'instant' });
-	});
+    // Inicializar al cargar
+    initThemeSelector();
+
+    // Reinicializar después de cada transición
+    document.addEventListener('astro:after-swap', () => {
+        initThemeSelector();
+        window.scrollTo({ left: 0, top: 0, behavior: 'instant' });
+    });
 </script>

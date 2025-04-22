@@ -4,25 +4,26 @@ import TitleSection from './TitleSection.astro';
 
 const cardItems = [
 	{
+		id: 'web-development',
 		title: 'Desarrollo de Soluciones Web',
 		description:
 			'Creamos páginas personalizadas e impactante que capturan la atención de su público objetivo, maximizando las conversiones y reflejando la esencia de su marca.',
 		image: 'https://placehold.co/100',
-		href: '/software',
+		url:'/services',
 		transitionName: 'img1',
 	},
 	{
+		id: 'desktop-applications',
 		title: 'Desarrollo de Aplicaciones de Escritorio',
 		description: 'Desarrollamos software a la medida de tus necesidades',
 		image: 'https://placehold.co/100',
-		href: '/services/software',
+		url: '/services',
 		transitionName: 'img2',
 	},
 ];
 ---
 
 <div class="max-w-7xl">
-	
 	<div class="grid grid-cols-1 gap-10 md:grid-cols-2">
 		{cardItems.map((card) => <ServiceCard {...card} />)}
 	</div>

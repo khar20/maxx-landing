@@ -62,16 +62,19 @@ const LANGUAGES = [
 </style>
 
 <script is:inline>
-	const langsMenu = document.getElementById('langs-menu');
-
-	document
-		.getElementById('lang-toggle-btn')
-		.addEventListener('click', (e) => {
-			e.stopPropagation();
-			langsMenu.classList.toggle('open');
-		});
-
-	document.addEventListener('click', () => {
-		langsMenu.classList.remove('open');
-	});
+    // Usar delegación de eventos para mayor robustez
+    document.addEventListener('click', (e) => {
+        // Cerrar el menú al hacer clic en cualquier parte fuera
+        const langsMenu = document.getElementById('langs-menu');
+        const toggleBtn = document.getElementById('lang-toggle-btn');
+        
+        if (e.target.closest('#lang-toggle-btn')) {
+            // Si el clic fue en el botón de toggle
+            e.stopPropagation();
+            langsMenu?.classList.toggle('open');
+        } else if (!e.target.closest('#langs-menu')) {
+            // Si el clic fue fuera del menú
+            langsMenu?.classList.remove('open');
+        }
+    });
 </script>

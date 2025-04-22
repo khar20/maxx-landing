@@ -3,49 +3,43 @@ import Layout from '@layouts/Layout.astro';
 import Header from '@components/Header.astro';
 import SectionContainer from '@components/SectionContainer.astro';
 import Footer from '@components/Footer.astro';
-
-import PricingHeader from '@components/PricingHeader.astro';
-import PricingCard from '@components/PricingCard.astro';
-import BusinessAdvantages from '@components/BusinessAdvantages.astro';
-import FAQ from '@components/FAQ.astro';
-import CustomPlan from '@components/CustomPlan.astro';
-
-import type { ColorOption } from '@components/PricingCard.astro';
-import PricingSegmentSelector from '@components/PricingSegmentSelector.astro';
-import Contact from '@components/Contact.astro';
 import { Image } from 'astro:assets';
 
+// Asegúrate de que los IDs coincidan con los de tu componente Services.astro
 const services = [
 	{
-		id: 'software-custom',
-		title: 'Desarrollo de Software Custom',
+		id: 'web-development',
+		title: 'Desarrollo de Soluciones Web',
 		description:
-			'Soluciones de software a medida adaptadas a tus necesidades específicas. Creamos aplicaciones personalizadas que resuelven problemas concretos y optimizan los procesos de tu negocio.',
+			'Creamos páginas personalizadas e impactante que capturan la atención de su público objetivo, maximizando las conversiones y reflejando la esencia de su marca.',
 		features: [
-			'Análisis detallado de requisitos y necesidades',
-			'Desarrollo ágil con entregas periódicas',
-			'Código limpio y mantenible',
-			'Soporte técnico post-lanzamiento',
-			'Escalabilidad para crecimiento futuro',
+			'Sitios web responsive adaptados a todos los dispositivos',
+			'Optimización SEO para mejor visibilidad',
+			'Diseño UI/UX centrado en la experiencia del usuario',
+			'Integración con sistemas de gestión de contenido',
+			'Desarrollo frontend y backend personalizado',
 		],
-		icon: 'code',
+		icon: 'web',
 		transitionName: 'img1',
+		image: 'https://placehold.co/100',
 	},
 	{
-		id: 'landing-pages',
-		title: 'Desarrollo de Landing Pages',
-		description:
-			'Páginas de aterrizaje optimizadas para convertir visitantes en clientes. Diseñadas para maximizar tu tasa de conversión con un diseño atractivo y enfocado en resultados.',
+		id: 'desktop-applications',
+		title: 'Desarrollo de Aplicaciones de Escritorio',
+		description: 
+			'Desarrollamos software a la medida de tus necesidades para optimizar los procesos internos de tu empresa y mejorar la productividad.',
 		features: [
-			'Diseño responsive adaptado a todos los dispositivos',
-			'Optimización SEO para mejor visibilidad',
-			'Tiempos de carga rápidos para reducir abandonos',
-			'Integración con herramientas de análisis',
-			'Diseño centrado en conversión',
+			'Aplicaciones multiplataforma (Windows, Mac, Linux)',
+			'Interfaces intuitivas y fáciles de usar',
+			'Integración con sistemas existentes',
+			'Alta seguridad y protección de datos',
+			'Soporte técnico continuo',
 		],
-		icon: 'layout',
+		icon: 'desktop',
 		transitionName: 'img2',
+		image: 'https://placehold.co/100',
 	},
+	// Puedes añadir más servicios aquí
 ];
 ---
 
@@ -59,7 +53,7 @@ const services = [
 			id="services"
 			class="flex min-h-screen w-full flex-col items-center justify-center from-[#0e173a] to-[#050814] px-4 py-16 dark:bg-linear-to-b"
 		>
-			<h1 class="mb-20 text-center text-5xl font-bold">
+			<h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl dark:text-white mb-12">
 				Nuestros Servicios
 			</h1>
 
@@ -67,55 +61,59 @@ const services = [
 				<div class="grid grid-cols-1 gap-8 md:grid-cols-2">
 					{
 						services.map((service) => (
-							<div class="flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-md transition-shadow duration-300 hover:shadow-lg dark:bg-gray-800">
-								<div class="flex h-full flex-col p-6">
-									<div class="mb-6 flex items-center">
-										<div class="mr-4 rounded-full bg-blue-100 p-3 dark:bg-blue-900">
-											<i
-												class={`icon icon-${service.icon} text-blue-600 dark:text-blue-400`}
-											/>
-										</div>
-										<h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-											{service.title}
-										</h3>
+							<div id={service.id} class="service-card flex h-full flex-col overflow-hidden rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-all hover:shadow-md dark:border-gray-800 dark:bg-gray-950">
+								<div class="mb-4 flex items-center space-x-4">
+									<div class="flex-shrink-0 rounded-full bg-gray-100 p-2 text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="24"
+											height="24"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											class="lucide lucide-globe h-10 w-10"
+										>
+											<circle cx="12" cy="12" r="10"></circle>
+											<path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+											<path d="M2 12h20"></path>
+										</svg>
 									</div>
-									<p class="mb-6 text-gray-600 dark:text-gray-300">
-										{service.description}
-									</p>
-									<div class="flex-grow">
-										<h4 class="mb-3 font-medium text-gray-900 dark:text-white">
-											Características
-										</h4>
-										<ul class="space-y-2">
-											{service.features.map((feature) => (
-												<li class="flex items-center">
-													<span class="mr-2 text-green-500">
-														✓
-													</span>
-													<span class="text-gray-600 dark:text-gray-300">
-														{feature}
-													</span>
-												</li>
-											))}
-										</ul>
-									</div>
-									<div class="container mt-6 flex items-center justify-between">
+									<h3 class="text-xl font-bold">{service.title}</h3>
+								</div>
+								<p class="text-gray-600 dark:text-gray-400 mb-6">
+									{service.description}
+								</p>
+								<div class="flex-grow">
+									<h4 class="mb-3 font-medium text-gray-900 dark:text-white">
+										Características
+									</h4>
+									<ul class="space-y-2">
+										{service.features.map((feature) => (
+											<li class="flex items-center">
+												<span class="mr-2 text-green-500">
+													✓
+												</span>
+												<span class="text-gray-600 dark:text-gray-300">
+													{feature}
+												</span>
+											</li>
+										))}
+									</ul>
+								</div>
+								<div class="mt-6 flex items-center justify-end">
+									<div class="relative h-32 w-32 overflow-hidden rounded-lg">
 										<Image
-											src="https://placehold.co/100"
+											src={service.image}
 											alt={service.title}
-											class="h-40 w-40 mx-auto"
-											width={64}
-											height={64}
+											transition:name={service.transitionName}
+											class="object-cover h-full w-full"
+											width={128}
+											height={128}
 											loading="lazy"
 										/>
-									</div>
-									<div class="mt-8">
-										<a
-											href={`/servicios/${service.id}`}
-											class="inline-block w-full rounded-lg bg-blue-600 px-5 py-3 text-center font-medium text-white transition-colors duration-200 hover:bg-blue-700"
-										>
-											Más información
-										</a>
 									</div>
 								</div>
 							</div>
@@ -129,24 +127,70 @@ const services = [
 			id="contact"
 			class="flex items-center justify-center p-4"
 		>
-			<Contact />
+			
 		</SectionContainer>
 	</main>
 	<Footer />
 </Layout>
 
-<style>
-	@keyframes pulse {
-		0%,
-		100% {
-			transform: scale(1);
-		}
-		50% {
-			transform: scale(1.02);
-		}
-	}
+<script>
+// Script para resaltar el servicio seleccionado cuando se carga la página
+// Usamos una función con nombre para evitar conflictos
+function highlightSelectedService() {
+  // Verifica si hay un hash en la URL
+  if (window.location.hash) {
+    const serviceId = window.location.hash.substring(1); // Elimina el # del hash
+    const serviceElement = document.getElementById(serviceId);
+    
+    if (serviceElement) {
+      // Elimina cualquier resaltado anterior
+      document.querySelectorAll('.service-card').forEach(card => {
+        if (card.id !== serviceId) {
+          card.classList.remove('highlighted-service');
+        }
+      });
+      
+      // Añade un efecto de resaltado al servicio seleccionado
+      serviceElement.classList.add('highlighted-service');
+      
+      // Scroll suave hacia el servicio con un pequeño offset para mejor visualización
+      setTimeout(() => {
+        serviceElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+    }
+  }
+}
 
-	.popular-service {
-		animation: pulse 2s infinite;
-	}
+// Utilizamos el evento view-transition-end para ejecutar nuestro código después de que
+// se completen las transiciones de página
+document.addEventListener('astro:after-swap', highlightSelectedService);
+
+// También ejecutamos la función al cargar inicialmente la página
+document.addEventListener('DOMContentLoaded', highlightSelectedService);
+</script>
+
+<style>
+  /* Estilo para el servicio destacado */
+  .highlighted-service {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+    border: 2px solid #3b82f6;
+    animation: highlight-pulse 2s infinite;
+    z-index: 10;
+    position: relative;
+  }
+  
+  @keyframes highlight-pulse {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.8);
+    }
+  }
+  
+  /* Transición suave para todas las tarjetas */
+  .service-card {
+    transition: all 0.5s ease-in-out;
+  }
 </style>
