@@ -1,0 +1,262 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Header from '@components/Header.astro';
+import SectionContainer from '@components/SectionContainer.astro';
+import Footer from '@components/Footer.astro';
+import { Image } from 'astro:assets';
+
+const service = {
+	id: 'desktop-applications',
+	title: 'Desarrollo de Aplicaciones de Escritorio',
+	description: 
+		'Desarrollamos software a la medida de tus necesidades para optimizar los procesos internos de tu empresa y mejorar la productividad.',
+	features: [
+		'Aplicaciones multiplataforma (Windows, Mac, Linux)',
+		'Interfaces intuitivas y fáciles de usar',
+		'Integración con sistemas existentes',
+		'Alta seguridad y protección de datos',
+		'Soporte técnico continuo',
+		'Gestión de bases de datos locales',
+		'Sistemas de reportes avanzados',
+		'Automatización de procesos empresariales',
+	],
+	icon: 'desktop',
+	transitionName: 'img2',
+	image: 'https://placehold.co/100',
+	detailedDescription: 'Creamos aplicaciones de escritorio robustas y eficientes que se adaptan perfectamente a los flujos de trabajo de tu empresa. Nuestras soluciones están diseñadas para maximizar la productividad, reducir errores manuales y proporcionar herramientas poderosas que impulsen el crecimiento de tu negocio.',
+	technologies: [
+		'Electron.js',
+		'C# .NET Framework',
+		'Java (Swing/JavaFX)',
+		'Python (Tkinter/PyQt)',
+		'C++ (Qt Framework)',
+		'SQLite, MySQL, PostgreSQL',
+	],
+	benefits: [
+		{
+			title: 'Mayor Productividad',
+			description: 'Automatiza tareas repetitivas y optimiza los flujos de trabajo de tu equipo.',
+			icon: '⚡'
+		},
+		{
+			title: 'Seguridad Avanzada',
+			description: 'Protección de datos sensibles con encriptación y controles de acceso.',
+			icon: '🔒'
+		},
+		{
+			title: 'Personalización Total',
+			description: 'Software diseñado específicamente para las necesidades de tu empresa.',
+			icon: '🎯'
+		},
+		{
+			title: 'Integración Completa',
+			description: 'Conecta con tus sistemas existentes sin interrumpir las operaciones.',
+			icon: '🔗'
+		},
+	],
+	process: [
+		{
+			step: 1,
+			title: 'Análisis de Requisitos',
+			description: 'Estudiamos tus procesos actuales y definimos los objetivos del software.'
+		},
+		{
+			step: 2,
+			title: 'Arquitectura y Diseño',
+			description: 'Diseñamos la estructura del sistema y la interfaz de usuario.'
+		},
+		{
+			step: 3,
+			title: 'Desarrollo e Implementación',
+			description: 'Codificamos la aplicación siguiendo las mejores prácticas de desarrollo.'
+		},
+		{
+			step: 4,
+			title: 'Pruebas y Validación',
+			description: 'Realizamos pruebas exhaustivas para garantizar la calidad y estabilidad.'
+		},
+		{
+			step: 5,
+			title: 'Despliegue y Capacitación',
+			description: 'Instalamos el software y capacitamos a tu equipo para su uso efectivo.'
+		},
+	]
+};
+---
+
+<Layout>
+	<Header />
+	<main
+		transition:animate="slide"
+		class="flex-1 text-gray-900 dark:border-white dark:bg-[#050814] dark:text-gray-200"
+	>
+		<!-- Hero Section -->
+<SectionContainer
+  id="hero"
+  class="relative flex min-h-screen w-full flex-col items-center justify-center px-4 py-16"
+>
+  <!-- Imagen de fondo con transparencia -->
+  <div class="absolute inset-0 -z-10">
+    <Image
+      src="https://placehold.co/1200x800"
+      alt="Imagen de fondo referencial"
+      class="h-full w-full object-cover opacity-30 dark:opacity-50"
+      loading="lazy"
+      width={1200}
+      height={800}
+    />
+  </div>
+
+  <div class="w-full max-w-6xl text-center z-10">
+    <h1
+      class="text-4xl font-extrabold tracking-tight sm:text-5xl mb-4
+      bg-gradient-to-r from-blue-700 to-blue-900
+      dark:from-cyan-400 dark:to-blue-600
+      bg-clip-text text-transparent"
+    >
+      {service.title}
+    </h1>
+    <p class="text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-12">
+      {service.detailedDescription}
+    </p>
+  </div>
+
+  <!-- Imagen secundaria sin animación -->
+  <div class="flex justify-center w-full max-w-6xl mt-8 z-10">
+    <div class="relative h-32 w-32 overflow-hidden rounded-lg">
+      <Image
+        src={service.image}
+        alt={service.title}
+        class="object-cover h-full w-full"
+        width={128}
+        height={128}
+        loading="lazy"
+      />
+    </div>
+  </div>
+</SectionContainer>
+
+
+		<!-- Benefits Section -->
+		<SectionContainer
+			id="benefits"
+			class="flex items-center justify-center px-4 py-16 bg-gray-50 dark:bg-gray-900/50"
+		>
+			<div class="w-full max-w-6xl">
+				<h2 class="text-3xl font-bold text-center text-blue-900 dark:text-white mb-12">
+					Beneficios de nuestras aplicaciones
+				</h2>
+				
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+					{service.benefits.map((benefit) => (
+						<div class="flex items-start p-6 bg-white dark:bg-gray-950 rounded-lg border border-gray-200 dark:border-gray-800 shadow-sm">
+							<div class="text-3xl mr-4 flex-shrink-0">{benefit.icon}</div>
+							<div>
+								<h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+									{benefit.title}
+								</h3>
+								<p class="text-gray-600 dark:text-gray-300">
+									{benefit.description}
+								</p>
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+		</SectionContainer>
+
+		<!-- Features Section -->
+		<SectionContainer
+			id="features"
+			class="flex items-center justify-center px-4 py-16"
+		>
+			<div class="w-full max-w-6xl">
+				<h2 class="text-3xl font-bold text-center text-blue-900 dark:text-white mb-12">
+					Características de nuestras aplicaciones
+				</h2>
+				
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					{service.features.map((feature) => (
+						<div class="flex items-center p-4 bg-white dark:bg-gray-950 rounded-lg border border-gray-200 dark:border-gray-800 shadow-sm">
+							<span class="mr-3 text-green-500 text-xl">✓</span>
+							<span class="text-gray-700 dark:text-gray-300">{feature}</span>
+						</div>
+					))}
+				</div>
+			</div>
+		</SectionContainer>
+
+		<!-- Technologies Section -->
+		<SectionContainer
+			id="technologies"
+			class="flex items-center justify-center px-4 py-16 bg-gray-50 dark:bg-gray-900/50"
+		>
+			<div class="w-full max-w-6xl">
+				<h2 class="text-3xl font-bold text-center text-blue-900 dark:text-white mb-12">
+					Tecnologías que utilizamos
+				</h2>
+				
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+					{service.technologies.map((tech) => (
+						<div class="bg-white dark:bg-gray-950 p-4 rounded-lg border border-gray-200 dark:border-gray-800 text-center shadow-sm">
+							<span class="text-gray-700 dark:text-gray-300 font-medium">{tech}</span>
+						</div>
+					))}
+				</div>
+			</div>
+		</SectionContainer>
+
+		<!-- Process Section -->
+		<SectionContainer
+			id="process"
+			class="flex items-center justify-center px-4 py-16"
+		>
+			<div class="w-full max-w-6xl">
+				<h2 class="text-3xl font-bold text-center text-blue-900 dark:text-white mb-12">
+					Nuestro proceso de desarrollo
+				</h2>
+				
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+					{service.process.map((item) => (
+						<div class="text-center">
+							<div class="w-12 h-12 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">
+								{item.step}
+							</div>
+							<h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+								{item.title}
+							</h3>
+							<p class="text-gray-600 dark:text-gray-300">
+								{item.description}
+							</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</SectionContainer>
+
+		<!-- CTA Section -->
+		<SectionContainer
+			id="contact"
+			class="flex items-center justify-center px-4 py-16 bg-gradient-to-r from-blue-700 to-blue-900 dark:from-cyan-400 dark:to-blue-700"
+		>
+			<div class="w-full max-w-4xl text-center">
+				<h2 class="text-3xl font-bold text-white mb-6">
+					¿Necesitas una aplicación de escritorio personalizada?
+				</h2>
+				<p class="text-purple-100 text-lg mb-8">
+					Contáctanos y desarrollemos juntos la solución de software que tu empresa necesita.
+				</p>
+				<a 
+					href="/contact"
+					class="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-600 font-semibold rounded-lg transition-all duration-300 hover:shadow-lg hover:scale-105 group"
+				>
+					<span>Solicitar consulta gratuita</span>
+					<svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+					</svg>
+				</a>
+			</div>
+		</SectionContainer>
+	</main>
+	<Footer />
+</Layout>

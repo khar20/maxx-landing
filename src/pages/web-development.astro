@@ -1,0 +1,218 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Header from '@components/Header.astro';
+import SectionContainer from '@components/SectionContainer.astro';
+import Footer from '@components/Footer.astro';
+import { Image } from 'astro:assets';
+
+import FeaturesAnimated from '@components/FeaturesAnimated.jsx';
+import TechnologiesAnimated from '@components/TechnologiesAnimated.jsx';
+
+const technologyIcons = {
+  'Node.js': '/images/1t.png',
+  'Astro': '/images/2t.png',
+  'React': '/images/3t.png',
+  'JavaScript': '/images/4t.png',
+  'Tailwind CSS': '/images/5t.png',
+};
+
+const service = {
+  id: 'web-development',
+  title: 'Desarrollo de Soluciones Web',
+  description:
+    'Creamos páginas personalizadas e impactante que capturan la atención de su público objetivo, maximizando las conversiones y reflejando la esencia de su marca.',
+  features: [
+    'Sitios web responsive adaptados a todos los dispositivos',
+    'Optimización SEO para mejor visibilidad',
+    'Diseño UI/UX centrado en la experiencia del usuario',
+    'Integración con sistemas de gestión de contenido',
+    'Desarrollo frontend y backend personalizado',
+    'E-commerce y tiendas online',
+    'Landing pages de alta conversión',
+    'Aplicaciones web progresivas (PWA)',
+  ],
+  icon: 'web',
+  transitionName: 'img1',
+  image: 'https://placehold.co/100',
+  detailedDescription:
+    'Nos especializamos en crear soluciones web completas que no solo se ven increíbles, sino que también funcionan de manera excepcional. Desde sitios web corporativos hasta complejas aplicaciones web, nuestro equipo combina diseño moderno con tecnología de vanguardia para entregar productos que superen las expectativas.',
+  technologies: [
+  'Node.js',
+  'Astro',
+  'React',
+  'JavaScript',
+  'Tailwind CSS',
+],
+  process: [
+    {
+      step: 1,
+      title: 'Análisis y Planificación',
+      description: 'Estudiamos tus necesidades y objetivos para crear una estrategia personalizada.',
+    },
+    {
+      step: 2,
+      title: 'Diseño y Prototipado',
+      description: 'Creamos wireframes y prototipos para visualizar la solución antes del desarrollo.',
+    },
+    {
+      step: 3,
+      title: 'Desarrollo',
+      description: 'Implementamos la solución usando las mejores prácticas y tecnologías modernas.',
+    },
+    {
+      step: 4,
+      title: 'Testing y Optimización',
+      description: 'Realizamos pruebas exhaustivas y optimizamos el rendimiento.',
+    },
+    {
+      step: 5,
+      title: 'Lanzamiento y Soporte',
+      description: 'Desplegamos tu proyecto y proporcionamos soporte continuo.',
+    },
+  ],
+};
+---
+
+<Layout>
+  <Header />
+  <main
+    transition:animate="slide"
+    class="flex-1 text-gray-900 dark:border-white dark:bg-[#050814] dark:text-gray-200"
+  >
+    <!-- Hero Section -->
+    <SectionContainer
+      id="hero"
+      class="relative flex min-h-screen w-full flex-col items-center justify-center px-4 py-16"
+    >
+      <!-- Imagen de fondo con transparencia -->
+      <div class="absolute inset-0 -z-10">
+        <Image
+          src="https://placehold.co/1200x800"
+          alt="Imagen de fondo referencial"
+          class="h-full w-full object-cover opacity-30 dark:opacity-50"
+          loading="lazy"
+          width={1200}
+          height={800}
+        />
+      </div>
+
+      <div class="w-full max-w-6xl text-center text-white z-10">
+        <h1
+          class="text-4xl font-extrabold tracking-tight sm:text-5xl mb-4
+          bg-gradient-to-r from-blue-700 to-blue-900
+          dark:from-cyan-400 dark:to-blue-600
+          bg-clip-text text-transparent"
+        >
+          {service.title}
+        </h1>
+        <p class="text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-12">
+          {service.detailedDescription}
+        </p>
+      </div>
+
+      <!-- Imagen secundaria sin animación -->
+      <div class="flex justify-center w-full max-w-6xl mt-8">
+        <div class="relative h-32 w-32 overflow-hidden rounded-lg z-10">
+          <Image
+            src="https://placehold.co/128"
+            alt={service.title}
+            class="object-cover h-full w-full"
+            width={128}
+            height={128}
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </SectionContainer>
+
+    <!-- Features Section con animación React -->
+    <SectionContainer
+      id="features"
+      class="flex items-center justify-center px-4 py-16"
+    >
+      <div class="w-full max-w-6xl">
+        <h2 class="text-3xl font-bold text-center text-blue-900 dark:text-white mb-0">
+          Lo que incluye nuestro servicio
+        </h2>
+
+        <FeaturesAnimated client:visible />
+      </div>
+    </SectionContainer>
+
+    <!-- Technologies Section -->
+    <SectionContainer
+  id="technologies"
+  class="flex items-center justify-center px-4 py-16 bg-gray-50 dark:bg-gray-900/50"
+>
+  <div class="w-full max-w-6xl">
+    <h2 class="text-3xl font-bold text-center text-blue-900 dark:text-white mb-12">
+      Tecnologías que utilizamos
+    </h2>
+
+    <TechnologiesAnimated
+      technologies={service.technologies}
+      technologyIcons={technologyIcons}
+      client:visible
+    />
+  </div>
+</SectionContainer>
+
+    <!-- Process Section -->
+    <SectionContainer
+      id="process"
+      class="flex items-center justify-center px-4 py-16"
+    >
+      <div class="w-full max-w-6xl">
+        <h2 class="text-3xl font-bold text-center text-blue-900 dark:text-white mb-12">
+          Nuestro proceso de trabajo
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {service.process.map((item) => (
+            <div class="text-center">
+              <div
+                class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4"
+              >
+                {item.step}
+              </div>
+              <h3 class="text-xl font-semibold text-blue-900 dark:text-white mb-2">
+                {item.title}
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300">{item.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </SectionContainer>
+
+    <!-- CTA Section -->
+    <SectionContainer
+  id="contact"
+  class="flex items-center justify-center px-4 py-16 bg-gradient-to-r from-blue-700 to-blue-900 dark:from-cyan-400 dark:to-blue-700"
+>
+  <div class="w-full max-w-4xl text-center">
+    <h2 class="text-3xl font-bold text-white mb-6">
+      ¿Listo para comenzar tu proyecto web?
+    </h2>
+    <p class="text-blue-100 text-lg mb-8">
+      Contacta con nosotros y comencemos a crear la solución web perfecta para tu negocio.
+    </p>
+    <a
+      href="/contact"
+      class="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-600 font-semibold rounded-lg transition-all duration-300 hover:shadow-lg hover:scale-105 group"
+    >
+      <span>Solicitar cotización</span>
+      <svg
+        class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </a>
+  </div>
+</SectionContainer>
+  </main>
+  <Footer />
+</Layout>

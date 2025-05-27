@@ -23,15 +23,15 @@ const LANGUAGES = [
 
 	<div
 		id="langs-menu"
-		class="absolute top-8 right-0 hidden min-w-[8rem] rounded-md border border-gray-100 bg-white/90 p-1 text-sm shadow-[0_3px_10px_rgb(0,0,0,0.2)] backdrop-blur-md dark:border-gray-500/20 dark:bg-gray-900/90"
+		class="lang-selector-dropdown absolute top-8 right-0 hidden min-w-[8rem] rounded-md border p-1 text-sm shadow-[0_3px_10px_rgb(0,0,0,0.2)] backdrop-blur-md"
 	>
 		<ul>
 			{
 				LANGUAGES.map(({ label, href }) => (
-					<li class="langs-menu-option rounded-sm hover:bg-neutral-400/40 dark:hover:bg-gray-500/50">
+					<li class="langs-menu-option cursor-default rounded-sm px-2 py-1.5 transition-colors">
 						<a
 							href={href}
-							class="block w-full px-2 py-1.5"
+							class="block w-full"
 						>
 							{label}
 						</a>
@@ -43,6 +43,27 @@ const LANGUAGES = [
 </div>
 
 <style>
+	/* Estilos del dropdown del lang selector */
+	.lang-selector-dropdown {
+		background-color: white;
+		border-color: rgba(21, 25, 237, 0.2);
+		color: #1519ed;
+	}
+	
+	.langs-menu-option {
+		color: #1519ed;
+	}
+	
+	.langs-menu-option:hover {
+		background-color: rgba(21, 25, 237, 0.1);
+		color: #1519ed;
+	}
+	
+	.langs-menu-option a {
+		color: inherit;
+		text-decoration: none;
+	}
+
 	#langs-menu.open {
 		display: inline;
 		animation: scale-up-center 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94)
@@ -59,22 +80,81 @@ const LANGUAGES = [
 			opacity: 1;
 		}
 	}
+	
+	/* Modo oscuro */
+	@media (prefers-color-scheme: dark) {
+		.lang-selector-dropdown {
+			background-color: #6b7280;
+			border-color: rgba(255, 255, 255, 0.2);
+			color: white;
+		}
+		
+		.langs-menu-option {
+			color: white;
+		}
+		
+		.langs-menu-option:hover {
+			background-color: rgba(255, 255, 255, 0.1);
+			color: white;
+		}
+	}
+	
+	html.dark .lang-selector-dropdown {
+		background-color: #6b7280;
+		border-color: rgba(255, 255, 255, 0.2);
+		color: white;
+	}
+	
+	html.dark .langs-menu-option {
+		color: white;
+	}
+	
+	html.dark .langs-menu-option:hover {
+		background-color: rgba(255, 255, 255, 0.1);
+		color: white;
+	}
 </style>
 
 <script is:inline>
-    // Usar delegación de eventos para mayor robustez
-    document.addEventListener('click', (e) => {
-        // Cerrar el menú al hacer clic en cualquier parte fuera
+    function initLangSelector() {
         const langsMenu = document.getElementById('langs-menu');
         const toggleBtn = document.getElementById('lang-toggle-btn');
         
-        if (e.target.closest('#lang-toggle-btn')) {
-            // Si el clic fue en el botón de toggle
-            e.stopPropagation();
-            langsMenu?.classList.toggle('open');
-        } else if (!e.target.closest('#langs-menu')) {
-            // Si el clic fue fuera del menú
+        // Función para cerrar todos los dropdowns
+        const closeAllDropdowns = () => {
+            const themesMenu = document.getElementById('themes-menu');
             langsMenu?.classList.remove('open');
+            themesMenu?.classList.remove('open');
+        };
+        
+        // Remover listeners antiguos clonando y reemplazando el elemento
+        if (toggleBtn) {
+            const newToggleBtn = toggleBtn.cloneNode(true);
+            toggleBtn.parentNode.replaceChild(newToggleBtn, toggleBtn);
+            
+            newToggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                // Cerrar otros dropdowns primero
+                const themesMenu = document.getElementById('themes-menu');
+                themesMenu?.classList.remove('open');
+                // Luego toggle este dropdown
+                langsMenu.classList.toggle('open');
+            });
         }
+
+        // Cerrar el menú al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('#langs-menu') && !e.target.closest('#lang-toggle-btn')) {
+                langsMenu?.classList.remove('open');
+            }
+        });
+    }
+
+    // Inicializar al cargar
+    initLangSelector();
+
+    // Reinicializar después de cada transición
+    document.addEventListener('astro:after-swap', () => {
+        initLangSelector();
     });
 </script>

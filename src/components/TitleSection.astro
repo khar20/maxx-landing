@@ -1,28 +1,29 @@
 <div class="my-5 w-full">
-	<h2
-		id="animated-heading"
-		class="relative pb-2 text-left text-3xl font-extrabold md:text-4xl dark:text-white"
-	>
-		<slot />
-		<span
-			class="absolute bottom-0 left-0 block h-1 w-0 bg-black dark:bg-white"
-		></span>
-	</h2>
+  <h2
+    id="animated-heading"
+    class="relative pb-2 text-left text-3xl font-extrabold md:text-4xl
+           text-[#0f1157] dark:text-white"
+  >
+    <slot />
+    <span
+      class="absolute bottom-0 left-0 block h-1 w-0 bg-[#0f1157] dark:bg-white"
+    ></span>
+  </h2>
 </div>
 
 <style>
-	@keyframes underlineGrow {
-		from {
-			width: 0;
-		}
-		to {
-			width: 100%;
-		}
-	}
+  @keyframes underlineGrow {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
 
-	#animated-heading span {
-		animation: underlineGrow 2s ease-in-out forwards;
-		animation-timeline: view();
-		animation-range: entry 0 cover 30%;
-	}
+  #animated-heading span {
+    animation: underlineGrow 2s ease-in-out forwards;
+    animation-timeline: view();
+    animation-range: entry 0 cover 30%;
+  }
 </style>

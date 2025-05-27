@@ -1,7 +1,6 @@
 ---
 import Image from 'astro/components/Image.astro';
 import CheckCircle from './icons/CheckCircle.astro';
-import TitleSection from './TitleSection.astro';
 
 const list = [
 	'Motivación por aprender y mejorar en cada tarea',
@@ -11,44 +10,55 @@ const list = [
 ];
 ---
 
-<div class="container px-4 md:px-6">
-	<div class="grid gap-6 lg:grid-cols-2 lg:gap-12">
-		<div class="flex flex-col justify-center space-y-4">
-			<div class="space-y-2">
-				<h2
-					class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl"
-				>
-					Apasionados por la tecnología
-				</h2>
-				<p class="text-muted-foreground max-w-[600px] md:text-xl">
-					Somos un equipo de desarrolladores que sienten verdadera
-					pasión por dar vida a soluciones digitales que marcan la
-					diferencia.
-				</p>
-			</div>
-			<ul class="grid gap-2">
-				{
-					list.map((item) => (
-						<li class="flex items-center gap-2">
-							<CheckCircle class="h-5 w-5 shrink-0" />
-							<span>{item}</span>
-						</li>
-					))
-				}
-			</ul>
-		</div>
-		<div class="flex items-center justify-center">
-			<Image
-				alt="Team working together"
-				loading="lazy"
-				width="550"
-				height="550"
-				decoding="async"
-				data-nimg="1"
-				class="rounded-lg object-cover"
-				src="https://placehold.co/550"
-				style="color: transparent;"
-			/>
-		</div>
-	</div>
+<div class="container px-4 md:px-6 py-12">
+  <div class="grid gap-10 md:gap-16 lg:grid-cols-2 items-center">
+    
+    <!-- Texto -->
+    <div class="flex flex-col justify-center space-y-6">
+      <div class="space-y-4">
+        <h2
+  class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight
+         bg-clip-text text-transparent
+         bg-gradient-to-r from-blue-700 to-blue-900
+         dark:from-cyan-400 dark:to-blue-700 dark:bg-gradient-to-r
+         pb-2"  
+>
+  Apasionados por la tecnología
+</h2>
+
+        <p class="text-gray-600 dark:text-gray-300 text-base md:text-lg max-w-[600px]">
+          Somos un equipo de desarrolladores que sienten verdadera
+          pasión por dar vida a soluciones digitales que marcan la
+          diferencia.
+        </p>
+      </div>
+
+      <!-- Lista -->
+      <ul class="space-y-3">
+        {list.map((item) => (
+          <li class="flex items-start gap-3 text-gray-800 dark:text-gray-200 text-sm md:text-base">
+            <CheckCircle class="h-5 w-5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Imagen -->
+    <div class="relative w-[550px] h-[400px]">
+  <div class="rounded-xl overflow-hidden shadow-xl ring-1 ring-gray-100 dark:ring-gray-800 w-full h-full">
+    <Image
+      alt="Team working together"
+      loading="lazy"
+      width="550"
+      height="400"
+      decoding="async"
+      class="rounded-xl object-cover brightness-100 dark:brightness-90 w-full h-full"
+      src="https://placehold.co/550x400"
+      style="color: transparent;"
+    />
+  </div>
 </div>
+  </div>
+</div>
+
