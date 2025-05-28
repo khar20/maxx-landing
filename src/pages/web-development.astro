@@ -9,8 +9,14 @@ import FeaturesAnimated from '@components/FeaturesAnimated.jsx';
 import TechnologiesAnimated from '@components/TechnologiesAnimated.jsx';
 
 const technologyIcons = {
-  'Node.js': '/images/1t.png',
-  'Astro': '/images/2t.png',
+  'Node.js': {
+    light: '/images/1t.png',
+    dark: '/images/1t-d.svg',
+  },
+  'Astro': {
+    light: '/images/2t.png',
+    dark: '/images/2t-d.svg',
+  },
   'React': '/images/3t.png',
   'JavaScript': '/images/4t.png',
   'Tailwind CSS': '/images/5t.png',

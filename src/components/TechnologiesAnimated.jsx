@@ -25,7 +25,9 @@ const TechnologiesAnimated = ({ technologies, technologyIcons }) => {
   animate="visible"
   className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 overflow-hidden"
 >
-  {technologies.map((tech) => (
+  {technologies.map((tech) => {
+  const icon = technologyIcons[tech];
+  return (
     <motion.div
       key={tech}
       variants={itemVariants}
@@ -33,14 +35,32 @@ const TechnologiesAnimated = ({ technologies, technologyIcons }) => {
     >
       <span className="text-gray-700 dark:text-gray-300 font-medium">{tech}</span>
 
-      <img
-        src={technologyIcons[tech]}
-        alt={`${tech} icon`}
-        className="h-12 w-auto object-contain ml-4"
-        loading="lazy"
-      />
+      {typeof icon === 'object' ? (
+        <>
+          <img
+            src={icon.light}
+            alt={`${tech} icon light`}
+            className="h-12 w-auto object-contain ml-4 block dark:hidden"
+            loading="lazy"
+          />
+          <img
+            src={icon.dark}
+            alt={`${tech} icon dark`}
+            className="h-12 w-auto object-contain ml-4 hidden dark:block"
+            loading="lazy"
+          />
+        </>
+      ) : (
+        <img
+          src={icon}
+          alt={`${tech} icon`}
+          className="h-12 w-auto object-contain ml-4"
+          loading="lazy"
+        />
+      )}
     </motion.div>
-  ))}
+  );
+})}
 </motion.div>
   );
 };
