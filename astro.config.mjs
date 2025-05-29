@@ -1,10 +1,13 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
-import react from '@astrojs/react';  // <-- Importa React para Astro
+import react from '@astrojs/react';
+import deno from "@deno/astro-adapter";
 
 export default defineConfig({
-  integrations: [react()],  // <-- Agrega el integrador React aquí
+  output: "server",
+  adapter: deno(),
+  integrations: [react()],
   vite: {
     plugins: [tailwindcss()]
   },
