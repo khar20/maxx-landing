@@ -1,0 +1,44 @@
+---
+interface TechnologyIcons {
+  [key: string]: string | { light: string; dark: string };
+}
+
+const technologies = Astro.props.technologies as string[];
+const technologyIcons = Astro.props.technologyIcons as TechnologyIcons;
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 overflow-hidden">
+  {technologies.map((tech) => {
+    const icon = technologyIcons[tech];
+
+    return (
+      <div class="flex items-center justify-between bg-white dark:bg-gray-950 p-4 border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-md transition duration-300 ease-in-out">
+        <span class="text-gray-700 dark:text-gray-300 font-medium">{tech}</span>
+
+        {typeof icon === 'object' ? (
+          <>
+            <img
+              src={icon.light}
+              alt={`${tech} icon light`}
+              class="h-12 w-auto object-contain ml-4 block dark:hidden"
+              loading="lazy"
+            />
+            <img
+              src={icon.dark}
+              alt={`${tech} icon dark`}
+              class="h-12 w-auto object-contain ml-4 hidden dark:block"
+              loading="lazy"
+            />
+          </>
+        ) : (
+          <img
+            src={icon}
+            alt={`${tech} icon`}
+            class="h-12 w-auto object-contain ml-4"
+            loading="lazy"
+          />
+        )}
+      </div>
+    );
+  })}
+</div>
